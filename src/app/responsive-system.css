@@ -2154,3 +2154,189 @@ html[dir="rtl"] .mg-scroll-top {
   right: auto;
   left: 20px;
 }
+
+/* ================================================
+   TESTIMONIALS SECTION
+   ================================================ */
+
+.mg-testimonials {
+  background: linear-gradient(180deg, #FFFFFF 0%, #FFF8F8 50%, #FFFFFF 100%);
+}
+
+.mg-testimonials-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+@media (min-width: 576px) {
+  .mg-testimonials-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 992px) {
+  .mg-testimonials-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.mg-testimonial-card {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  box-shadow: var(--shadow-md);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  border: 1px solid rgba(231, 84, 129, 0.08);
+}
+
+.mg-testimonial-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(231, 84, 129, 0.15);
+}
+
+.mg-testimonial-quote {
+  margin-bottom: var(--space-md);
+}
+
+.mg-quote-icon {
+  color: var(--mg-pink);
+  opacity: 0.5;
+}
+
+.mg-testimonial-text {
+  font-size: var(--text-sm);
+  color: var(--mg-gray);
+  line-height: 1.7;
+  margin-bottom: var(--space-md);
+  min-height: 80px;
+}
+
+.mg-testimonial-rating {
+  display: flex;
+  gap: 2px;
+  margin-bottom: var(--space-md);
+}
+
+.mg-testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding-top: var(--space-md);
+  border-top: 1px solid rgba(231, 84, 129, 0.1);
+}
+
+.mg-author-avatar {
+  width: 45px;
+  height: 45px;
+  background: linear-gradient(135deg, var(--mg-pink) 0%, var(--mg-pink-light) 100%);
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 700;
+  font-size: var(--text-lg);
+  flex-shrink: 0;
+}
+
+.mg-author-info h4 {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--mg-dark);
+  margin: 0;
+}
+
+.mg-author-info span {
+  font-size: var(--text-xs);
+  color: var(--mg-gray);
+}
+
+/* RTL Support for Testimonials */
+html[dir="rtl"] .mg-testimonial-author {
+  flex-direction: row-reverse;
+}
+
+html[dir="rtl"] .mg-author-info {
+  text-align: right;
+}
+
+/* ================================================
+   WHATSAPP FLOATING BUTTON
+   ================================================ */
+
+.mg-whatsapp-btn {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  background: #25D366;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+  z-index: 998;
+  cursor: pointer;
+  transition: all var(--transition-base);
+}
+
+.mg-whatsapp-btn:hover {
+  background: #20BA5C;
+  box-shadow: 0 6px 30px rgba(37, 211, 102, 0.5);
+}
+
+.mg-whatsapp-btn svg {
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+/* Pulse animation for WhatsApp button */
+.mg-whatsapp-btn::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: #25D366;
+  animation: whatsappPulse 2s ease-out infinite;
+  z-index: -1;
+}
+
+@keyframes whatsappPulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+/* RTL Support for WhatsApp Button */
+html[dir="rtl"] .mg-whatsapp-btn {
+  right: auto;
+  left: 20px;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 575px) {
+  .mg-whatsapp-btn {
+    width: 55px;
+    height: 55px;
+    bottom: 80px;
+    right: 15px;
+  }
+
+  .mg-whatsapp-btn svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  html[dir="rtl"] .mg-whatsapp-btn {
+    right: auto;
+    left: 15px;
+  }
+}
