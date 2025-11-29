@@ -74,10 +74,10 @@ const CompactLanding: React.FC<CompactLandingProps> = ({ lang = 'en' }) => {
         contact: 'Contact'
       },
       hero: {
-        badge: 'Premium Beauty Platform',
-        title: 'Your Beauty,',
+        badge: 'Premium Beauty & Wellness Platform',
+        title: 'Your Beauty & Wellness,',
         titleHighlight: 'Perfectly Scheduled',
-        subtitle: 'Book premium treatments at top beauty centers, clinics & spas. Pay flexibly with Tabby & Tamara.',
+        subtitle: 'Book premium treatments at top salons, clinics, spas & wellness centers. Pay flexibly with Tabby & Tamara.',
         ctaPrimary: 'Get Started',
         ctaSecondary: 'Be a Partner',
         paymentLabel: 'Supported Payments:'
@@ -85,12 +85,12 @@ const CompactLanding: React.FC<CompactLandingProps> = ({ lang = 'en' }) => {
       services: {
         label: 'Our Services',
         title: 'What We Offer',
-        subtitle: 'Everything you need for your beauty business',
+        subtitle: 'Everything you need for your beauty & wellness business',
         items: [
           { icon: '🎁', title: 'Gift Cards System', desc: 'Digital gift cards with instant delivery' },
-          { icon: '💇', title: 'Salon Services', desc: 'Book appointments at premium salons' },
-          { icon: '🏢', title: 'Corporate Gifts', desc: 'Bulk gifting solutions for businesses' },
-          { icon: '🔗', title: 'Business APIs', desc: 'Integrate with your existing systems' }
+          { icon: '💇', title: 'Salon & Spa', desc: 'Book appointments at premium salons & spas' },
+          { icon: '🏥', title: 'Clinics & Wellness', desc: 'Medical aesthetics & wellness centers' },
+          { icon: '🏢', title: 'Corporate Gifts', desc: 'Bulk gifting solutions for businesses' }
         ]
       },
       whyUs: {
@@ -107,7 +107,7 @@ const CompactLanding: React.FC<CompactLandingProps> = ({ lang = 'en' }) => {
         label: 'Simple Process',
         title: 'How It Works',
         steps: [
-          { num: '1', title: 'Discover', desc: 'Browse treatments & clinics' },
+          { num: '1', title: 'Discover', desc: 'Browse salons, clinics & spas' },
           { num: '2', title: 'Book', desc: 'Choose your time & pay' },
           { num: '3', title: 'Glow', desc: 'Enjoy your treatment' }
         ]
@@ -121,10 +121,10 @@ const CompactLanding: React.FC<CompactLandingProps> = ({ lang = 'en' }) => {
       },
       gift: {
         title: "Glow Someone's Day",
-        subtitle: 'Send a Beauty Gift Instantly',
-        description: 'Send salon, spa, or clinic experiences to your loved ones in just a few taps.',
+        subtitle: 'Send a Beauty & Wellness Gift Instantly',
+        description: 'Send salon, clinic, spa, or wellness experiences to your loved ones in just a few taps.',
         steps: [
-          { num: '1', icon: '🏰', title: 'Pick a Destination', desc: 'Choose from premium salons, spas, or beauty clinics' },
+          { num: '1', icon: '🏰', title: 'Pick a Destination', desc: 'Choose from premium salons, clinics, spas & wellness centers' },
           { num: '2', icon: '🎨', title: 'Customize Your Gift', desc: 'Select amount and pick a beautiful card theme' },
           { num: '3', icon: '💝', title: 'Send with Love', desc: 'Instantly deliver joy to friends and loved ones' }
         ],
@@ -138,7 +138,7 @@ const CompactLanding: React.FC<CompactLandingProps> = ({ lang = 'en' }) => {
       partner: {
         label: 'Join Us',
         title: 'Become a Partner',
-        subtitle: 'Grow your beauty business with MuchGlow',
+        subtitle: 'Grow your salon, clinic, or wellness business with MuchGlow',
         benefits: [
           'Access 50,000+ active users',
           'Zero commission first 3 months',
@@ -148,7 +148,7 @@ const CompactLanding: React.FC<CompactLandingProps> = ({ lang = 'en' }) => {
         ],
         formTitle: 'Quick Registration',
         fields: {
-          companyName: 'Company Name',
+          companyName: 'Business Name',
           contactPerson: 'Contact Person',
           email: 'Email Address',
           phone: 'Phone Number',
@@ -157,7 +157,7 @@ const CompactLanding: React.FC<CompactLandingProps> = ({ lang = 'en' }) => {
           message: 'Message (Optional)'
         },
         countries: ['UAE', 'Saudi Arabia', 'Kuwait', 'Qatar', 'Bahrain', 'Oman'],
-        businessTypes: ['Salon', 'Spa', 'Clinic', 'Beauty Center', 'Gym/Fitness', 'Other'],
+        businessTypes: ['Salon', 'Spa', 'Aesthetic Clinic', 'Medical Clinic', 'Beauty Center', 'Wellness Center', 'Gym/Fitness', 'Other'],
         submit: 'Submit Application',
         submitting: 'Submitting...',
         success: 'Application submitted! We\'ll contact you within 24 hours.'
@@ -166,14 +166,14 @@ const CompactLanding: React.FC<CompactLandingProps> = ({ lang = 'en' }) => {
         label: 'Customer Reviews',
         title: 'What Our Clients Say',
         items: [
-          { name: 'Sara Al-Rashid', role: 'Regular Customer', rating: 5, text: 'MuchGlow made booking my spa appointments so easy! The gift card feature is perfect for surprising friends.' },
-          { name: 'Fatima Hassan', role: 'Salon Owner', rating: 5, text: 'As a partner, MuchGlow has increased our bookings by 40%. The platform is professional and easy to use.' },
-          { name: 'Noor Ahmed', role: 'Beauty Enthusiast', rating: 5, text: 'Love the flexible payment options! Tabby integration means I can enjoy premium treatments without worry.' },
-          { name: 'Layla Mohammed', role: 'Corporate Client', rating: 5, text: 'We use MuchGlow for all our employee wellness gifts. The bulk ordering system is fantastic!' }
+          { name: 'Sara Al-Rashid', role: 'Regular Customer', rating: 5, text: 'MuchGlow made booking my clinic and spa appointments so easy! The gift card feature is perfect for surprising friends.' },
+          { name: 'Dr. Fatima Hassan', role: 'Clinic Owner', rating: 5, text: 'As a clinic partner, MuchGlow has increased our bookings by 40%. The platform is professional and easy to use.' },
+          { name: 'Noor Ahmed', role: 'Beauty Enthusiast', rating: 5, text: 'Love the flexible payment options! Tabby integration means I can enjoy premium treatments at salons and clinics.' },
+          { name: 'Layla Mohammed', role: 'Corporate Client', rating: 5, text: 'We use MuchGlow for all our employee wellness gifts at clinics and spas. The bulk ordering is fantastic!' }
         ]
       },
       footer: {
-        desc: 'MuchGlow simplifies beauty appointments for in-salon, at-home, or virtual consultations.',
+        desc: 'MuchGlow simplifies booking at salons, clinics, spas & wellness centers. In-person or virtual consultations.',
         headOffice: 'Head Office',
         address: 'Al Ain, UAE',
         getApp: 'Get the App',
@@ -193,10 +193,10 @@ const CompactLanding: React.FC<CompactLandingProps> = ({ lang = 'en' }) => {
         contact: 'اتصل بنا'
       },
       hero: {
-        badge: 'منصة الجمال المتميزة',
-        title: 'جمالك،',
+        badge: 'منصة الجمال والعافية المتميزة',
+        title: 'جمالك وعافيتك،',
         titleHighlight: 'مجدول بإتقان',
-        subtitle: 'احجز علاجات متميزة في أفضل مراكز التجميل والعيادات والمنتجعات. ادفع بمرونة مع تابي وتمارا.',
+        subtitle: 'احجز علاجات متميزة في أفضل الصالونات والعيادات والمنتجعات ومراكز العافية. ادفع بمرونة مع تابي وتمارا.',
         ctaPrimary: 'ابدأ الآن',
         ctaSecondary: 'كن شريكاً',
         paymentLabel: 'طرق الدفع المدعومة:'
@@ -204,12 +204,12 @@ const CompactLanding: React.FC<CompactLandingProps> = ({ lang = 'en' }) => {
       services: {
         label: 'خدماتنا',
         title: 'ما نقدمه',
-        subtitle: 'كل ما تحتاجه لأعمال التجميل الخاصة بك',
+        subtitle: 'كل ما تحتاجه لأعمال الجمال والعافية الخاصة بك',
         items: [
           { icon: '🎁', title: 'نظام بطاقات الهدايا', desc: 'بطاقات هدايا رقمية بتوصيل فوري' },
-          { icon: '💇', title: 'خدمات الصالون', desc: 'احجز مواعيد في صالونات متميزة' },
-          { icon: '🏢', title: 'هدايا الشركات', desc: 'حلول إهداء جماعية للشركات' },
-          { icon: '🔗', title: 'واجهات برمجة الأعمال', desc: 'تكامل مع أنظمتك الحالية' }
+          { icon: '💇', title: 'الصالونات والسبا', desc: 'احجز مواعيد في صالونات ومنتجعات متميزة' },
+          { icon: '🏥', title: 'العيادات والعافية', desc: 'التجميل الطبي ومراكز العافية' },
+          { icon: '🏢', title: 'هدايا الشركات', desc: 'حلول إهداء جماعية للشركات' }
         ]
       },
       whyUs: {
@@ -226,7 +226,7 @@ const CompactLanding: React.FC<CompactLandingProps> = ({ lang = 'en' }) => {
         label: 'عملية بسيطة',
         title: 'كيف يعمل',
         steps: [
-          { num: '1', title: 'اكتشف', desc: 'تصفح العلاجات والعيادات' },
+          { num: '1', title: 'اكتشف', desc: 'تصفح الصالونات والعيادات والمنتجعات' },
           { num: '2', title: 'احجز', desc: 'اختر وقتك وادفع' },
           { num: '3', title: 'تألق', desc: 'استمتع بعلاجك' }
         ]
@@ -240,10 +240,10 @@ const CompactLanding: React.FC<CompactLandingProps> = ({ lang = 'en' }) => {
       },
       gift: {
         title: 'أضئ يوم شخص ما',
-        subtitle: 'أرسل هدية جمال فورية',
-        description: 'أرسل تجارب الصالون والسبا والعيادة لأحبائك ببضع نقرات.',
+        subtitle: 'أرسل هدية جمال وعافية فورية',
+        description: 'أرسل تجارب الصالون والعيادة والسبا ومراكز العافية لأحبائك ببضع نقرات.',
         steps: [
-          { num: '1', icon: '🏰', title: 'اختر الوجهة', desc: 'اختر من الصالونات والمنتجعات والعيادات المتميزة' },
+          { num: '1', icon: '🏰', title: 'اختر الوجهة', desc: 'اختر من الصالونات والعيادات والمنتجعات ومراكز العافية' },
           { num: '2', icon: '🎨', title: 'خصص هديتك', desc: 'اختر المبلغ وتصميم البطاقة الجميل' },
           { num: '3', icon: '💝', title: 'أرسل بحب', desc: 'اسعد أصدقاءك وأحبائك فوراً' }
         ],
@@ -257,7 +257,7 @@ const CompactLanding: React.FC<CompactLandingProps> = ({ lang = 'en' }) => {
       partner: {
         label: 'انضم إلينا',
         title: 'كن شريكاً',
-        subtitle: 'طوّر أعمال التجميل الخاصة بك مع ماتش جلو',
+        subtitle: 'طوّر أعمال الصالون أو العيادة أو مركز العافية مع ماتش جلو',
         benefits: [
           'الوصول إلى أكثر من 50,000 مستخدم نشط',
           'صفر عمولة لأول 3 أشهر',
@@ -267,7 +267,7 @@ const CompactLanding: React.FC<CompactLandingProps> = ({ lang = 'en' }) => {
         ],
         formTitle: 'تسجيل سريع',
         fields: {
-          companyName: 'اسم الشركة',
+          companyName: 'اسم النشاط التجاري',
           contactPerson: 'الشخص المسؤول',
           email: 'البريد الإلكتروني',
           phone: 'رقم الهاتف',
@@ -276,7 +276,7 @@ const CompactLanding: React.FC<CompactLandingProps> = ({ lang = 'en' }) => {
           message: 'رسالة (اختياري)'
         },
         countries: ['الإمارات', 'السعودية', 'الكويت', 'قطر', 'البحرين', 'عُمان'],
-        businessTypes: ['صالون', 'سبا', 'عيادة', 'مركز تجميل', 'نادي رياضي', 'أخرى'],
+        businessTypes: ['صالون', 'سبا', 'عيادة تجميل', 'عيادة طبية', 'مركز تجميل', 'مركز عافية', 'نادي رياضي', 'أخرى'],
         submit: 'إرسال الطلب',
         submitting: 'جاري الإرسال...',
         success: 'تم إرسال الطلب! سنتواصل معك خلال 24 ساعة.'
@@ -285,14 +285,14 @@ const CompactLanding: React.FC<CompactLandingProps> = ({ lang = 'en' }) => {
         label: 'آراء العملاء',
         title: 'ماذا يقول عملاؤنا',
         items: [
-          { name: 'سارة الراشد', role: 'عميلة منتظمة', rating: 5, text: 'ماتش جلو جعل حجز مواعيد السبا سهلاً جداً! ميزة بطاقات الهدايا مثالية لمفاجأة الأصدقاء.' },
-          { name: 'فاطمة حسن', role: 'صاحبة صالون', rating: 5, text: 'كشريك، زاد ماتش جلو حجوزاتنا بنسبة 40%. المنصة احترافية وسهلة الاستخدام.' },
-          { name: 'نور أحمد', role: 'عاشقة الجمال', rating: 5, text: 'أحب خيارات الدفع المرنة! تكامل تابي يعني أنني أستطيع الاستمتاع بعلاجات متميزة بدون قلق.' },
-          { name: 'ليلى محمد', role: 'عميلة شركات', rating: 5, text: 'نستخدم ماتش جلو لجميع هدايا العافية للموظفين. نظام الطلب بالجملة رائع!' }
+          { name: 'سارة الراشد', role: 'عميلة منتظمة', rating: 5, text: 'ماتش جلو جعل حجز مواعيد العيادات والسبا سهلاً جداً! ميزة بطاقات الهدايا مثالية لمفاجأة الأصدقاء.' },
+          { name: 'د. فاطمة حسن', role: 'صاحبة عيادة', rating: 5, text: 'كشريك عيادة، زاد ماتش جلو حجوزاتنا بنسبة 40%. المنصة احترافية وسهلة الاستخدام.' },
+          { name: 'نور أحمد', role: 'عاشقة الجمال', rating: 5, text: 'أحب خيارات الدفع المرنة! تكامل تابي يعني أنني أستطيع الاستمتاع بعلاجات الصالونات والعيادات.' },
+          { name: 'ليلى محمد', role: 'عميلة شركات', rating: 5, text: 'نستخدم ماتش جلو لجميع هدايا العافية للموظفين في العيادات والمنتجعات. نظام الطلب بالجملة رائع!' }
         ]
       },
       footer: {
-        desc: 'ماتش جلو يسهّل مواعيد التجميل للصالون أو المنزل أو الاستشارات الافتراضية.',
+        desc: 'ماتش جلو يسهّل الحجز في الصالونات والعيادات والمنتجعات ومراكز العافية. حضورياً أو افتراضياً.',
         headOffice: 'المكتب الرئيسي',
         address: 'العين، الإمارات',
         getApp: 'حمّل التطبيق',
