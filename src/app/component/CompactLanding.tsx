@@ -463,8 +463,21 @@ const CompactLanding: React.FC<CompactLandingProps> = ({ lang = 'en' }) => {
                   </motion.li>
                 ))}
               </ul>
+              {/* Language Switcher in Mobile Menu */}
               <motion.div
-                style={{ marginTop: '2rem', display: 'flex', gap: '1rem' }}
+                style={{ marginTop: '1.5rem', display: 'flex', justifyContent: 'center' }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4, duration: 0.3 }}
+              >
+                <div className="mg-lang-switch" style={{ display: 'flex' }}>
+                  <Link href="/en" className={`mg-lang-btn ${lang === 'en' ? 'active' : ''}`} onClick={() => setMobileMenuOpen(false)}>EN</Link>
+                  <Link href="/ar" className={`mg-lang-btn ${lang === 'ar' ? 'active' : ''}`} onClick={() => setMobileMenuOpen(false)}>AR</Link>
+                </div>
+              </motion.div>
+
+              <motion.div
+                style={{ marginTop: '1rem', display: 'flex', gap: '1rem' }}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5, duration: 0.3 }}

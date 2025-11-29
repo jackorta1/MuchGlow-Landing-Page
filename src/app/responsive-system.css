@@ -570,15 +570,23 @@ body {
   gap: var(--space-sm);
 }
 
+/* Hide language switch on mobile, show only hamburger */
+@media (max-width: 991px) {
+  .mg-nav-actions .mg-lang-switch {
+    display: none;
+  }
+}
+
 /* Mobile Menu Button */
 .mg-menu-btn {
   display: flex;
-  flex-direction: column;
-  gap: 5px;
+  align-items: center;
+  justify-content: center;
   background: none;
   border: none;
   cursor: pointer;
   padding: var(--space-sm);
+  color: var(--mg-dark);
 }
 
 @media (min-width: 992px) {
@@ -606,15 +614,13 @@ body {
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   padding: var(--space-xl);
-  transform: translateX(100%);
-  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 999;
   overflow-y: auto;
   box-shadow: -10px 0 40px rgba(0, 0, 0, 0.1);
 }
 
 .mg-mobile-menu.active {
-  transform: translateX(0);
+  /* Active state handled by Framer Motion */
 }
 
 .mg-mobile-nav-links {
