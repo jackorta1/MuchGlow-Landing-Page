@@ -2,8 +2,8 @@
 
 :root {
   /* Sophisticated Color Palette */
-  --premium-gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 100%);
-  --premium-gradient-2: linear-gradient(135deg, #fa709a 0%, #fee140 50%, #fa709a 100%);
+  --premium-gradient-1: linear-gradient(135deg, #0891B2 0%, #0EA5E9 25%, #22D3EE 50%, #D97706 100%);
+  --premium-gradient-2: linear-gradient(135deg, #D97706 0%, #F59E0B 50%, #D97706 100%);
   --premium-gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 50%, #4facfe 100%);
   --premium-gradient-dark: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 50%, #0f0f1e 100%);
   --premium-gradient-light: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(240,240,255,0.9) 100%);
@@ -605,7 +605,7 @@ html {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(135deg, #764ba2, #f093fb);
+  background: linear-gradient(135deg, #0891B2, #22D3EE);
 }
 
 /* Print Styles */

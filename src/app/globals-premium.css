@@ -1,58 +1,58 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap');
 
 :root{
-  /* Primary Brand Colors - Luxury Beauty Palette */
-  --primary: #E75481;
-  --primary-dark: #d43a69;
-  --primary-light: #FFE5EC;
-  
+  /* Primary Brand Colors - Gender Neutral Teal & Gold */
+  --primary: #0891B2;
+  --primary-dark: #0e7490;
+  --primary-light: #E0F7FA;
+
   /* Neutral Palette */
-  --neutral-900: #1a1518;
-  --neutral-800: #2a2427;
-  --neutral-700: #3a3437;
-  --neutral-600: #4a4145;
-  --neutral-500: #6a6165;
-  --neutral-400: #8a8185;
-  --neutral-300: #C8C2C6;
-  --neutral-200: #E8E5E7;
-  --neutral-100: #F8F6F7;
+  --neutral-900: #1a1a1f;
+  --neutral-800: #2a2a2f;
+  --neutral-700: #3a3a3f;
+  --neutral-600: #4a4a52;
+  --neutral-500: #6a6a72;
+  --neutral-400: #8a8a92;
+  --neutral-300: #C8C8CC;
+  --neutral-200: #E8E8EA;
+  --neutral-100: #F8F8F9;
   --neutral-50: #FDFCFC;
-  
+
   /* Luxury Accent Colors */
-  --rose-gold: #E8B4B8;
+  --rose-gold: #0891B2;
   --champagne: #F7E7CE;
-  --deep-plum: #6B3AA0;
-  --soft-blush: #FFF0F5;
+  --deep-plum: #1E3A5F;
+  --soft-blush: #F0FAFA;
   --pearl: #FAFAFA;
-  
+
   /* Background Colors */
   --bg-primary: #FFFFFF;
   --bg-secondary: #FDFCFC;
-  --bg-accent: #FFF8F8;
-  --bg-dark: #1a1518;
-  
+  --bg-accent: #F5FAFA;
+  --bg-dark: #1a1a1f;
+
   /* Text Colors */
-  --text-primary: #1a1518;
-  --text-secondary: #4a4145;
-  --text-tertiary: #6a6165;
-  --text-light: #8a8185;
+  --text-primary: #1a1a1f;
+  --text-secondary: #4a4a52;
+  --text-tertiary: #6a6a72;
+  --text-light: #8a8a92;
   --text-inverse: #FFFFFF;
-  
+
   /* Gradients - Subtle Luxury */
-  --gradient-primary: linear-gradient(135deg, #E75481 0%, #E8B4B8 100%);
-  --gradient-subtle: linear-gradient(135deg, #FFF8F8 0%, #FFE5EC 100%);
-  --gradient-luxury: linear-gradient(135deg, #F7E7CE 0%, #E8B4B8 100%);
-  --gradient-premium: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(231,84,129,0.05) 100%);
-  
+  --gradient-primary: linear-gradient(135deg, #0891B2 0%, #22D3EE 100%);
+  --gradient-subtle: linear-gradient(135deg, #F5FAFA 0%, #E0F7FA 100%);
+  --gradient-luxury: linear-gradient(135deg, #F7E7CE 0%, #D97706 100%);
+  --gradient-premium: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(8,145,178,0.05) 100%);
+
   /* Shadows - Soft and Elegant */
   --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   --shadow-sm: 0 2px 4px 0 rgba(0, 0, 0, 0.06);
   --shadow-md: 0 4px 12px 0 rgba(0, 0, 0, 0.08);
-  --shadow-premium: 0 10px 40px rgba(231, 84, 129, 0.15);
-  --shadow-glow: 0 0 30px rgba(231, 84, 129, 0.3);
+  --shadow-premium: 0 10px 40px rgba(8, 145, 178, 0.15);
+  --shadow-glow: 0 0 30px rgba(8, 145, 178, 0.3);
   --shadow-lg: 0 8px 24px 0 rgba(0, 0, 0, 0.10);
   --shadow-xl: 0 16px 48px 0 rgba(0, 0, 0, 0.12);
-  --shadow-glow: 0 0 40px rgba(231, 84, 129, 0.15);
+  --shadow-glow: 0 0 40px rgba(8, 145, 178, 0.15);
   
   /* Spacing System */
   --space-xs: 0.25rem;

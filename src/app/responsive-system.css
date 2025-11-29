@@ -25,15 +25,15 @@
   --text-4xl: 2.25rem;
   --text-5xl: 3rem;
 
-  /* Brand Colors */
-  --mg-pink: #E75481;
-  --mg-pink-light: #FF6B9D;
-  --mg-pink-dark: #d43a69;
-  --mg-gold: #C9A96E;
-  --mg-gold-light: #DFC08C;
-  --mg-dark: #1a1518;
-  --mg-gray: #4a4145;
-  --mg-light: #FFF8F8;
+  /* Brand Colors - Gender Neutral Teal & Gold */
+  --mg-pink: #0891B2;
+  --mg-pink-light: #22D3EE;
+  --mg-pink-dark: #0e7490;
+  --mg-gold: #D97706;
+  --mg-gold-light: #F59E0B;
+  --mg-dark: #1a1a1f;
+  --mg-gray: #4a4a52;
+  --mg-light: #F5FAFA;
   --mg-white: #FFFFFF;
 
   /* Shadows */
@@ -41,7 +41,7 @@
   --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
   --shadow-lg: 0 10px 30px rgba(0,0,0,0.12);
   --shadow-xl: 0 20px 50px rgba(0,0,0,0.15);
-  --shadow-pink: 0 8px 25px rgba(231, 84, 129, 0.25);
+  --shadow-pink: 0 8px 25px rgba(8, 145, 178, 0.25);
 
   /* Border Radius */
   --radius-sm: 8px;
@@ -84,7 +84,7 @@ body {
   font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   line-height: 1.6;
   color: var(--mg-dark);
-  background: linear-gradient(135deg, #fef5f7 0%, #ffffff 100%);
+  background: linear-gradient(135deg, #f0fafa 0%, #ffffff 100%);
   min-height: 100vh;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
@@ -93,7 +93,7 @@ body {
 
 /* Selection Color */
 ::selection {
-  background: rgba(231, 84, 129, 0.2);
+  background: rgba(8, 145, 178, 0.2);
   color: var(--mg-dark);
 }
 
@@ -1572,7 +1572,7 @@ html[dir="rtl"] .mg-social-links {
 
 .mg-gift-section {
   padding: var(--space-3xl) 0;
-  background: linear-gradient(180deg, #FFFFFF 0%, #FFF8F8 50%, #FFFFFF 100%);
+  background: linear-gradient(180deg, #FFFFFF 0%, #F5FAFA 50%, #FFFFFF 100%);
   position: relative;
   overflow: hidden;
 }
@@ -2174,7 +2174,7 @@ html[dir="rtl"] .mg-scroll-top {
    ================================================ */
 
 .mg-testimonials {
-  background: linear-gradient(180deg, #FFFFFF 0%, #FFF8F8 50%, #FFFFFF 100%);
+  background: linear-gradient(180deg, #FFFFFF 0%, #F5FAFA 50%, #FFFFFF 100%);
 }
 
 .mg-testimonials-grid {
