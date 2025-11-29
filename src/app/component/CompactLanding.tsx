@@ -389,7 +389,7 @@ const CompactLanding: React.FC<CompactLandingProps> = ({ lang = 'en' }) => {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
-              <Image src={MuchGlowLogo} alt="MuchGlow" height={45} width={150} priority />
+              <Image src={MuchGlowLogo} alt="MuchGlow" height={55} width={180} priority />
             </motion.div>
           </Link>
 
@@ -1112,7 +1112,7 @@ const CompactLanding: React.FC<CompactLandingProps> = ({ lang = 'en' }) => {
         <div className="mg-container">
           <div className="mg-footer-content">
             <div className="mg-footer-brand">
-              <Image src={MuchGlowLogo} alt="MuchGlow" className="mg-footer-logo" height={50} width={150} />
+              <Image src={MuchGlowLogo} alt="MuchGlow" className="mg-footer-logo" height={60} width={190} />
               <p className="mg-footer-desc">{t.footer.desc}</p>
               <div className="mg-social-links">
                 <a href="https://instagram.com" className="mg-social-link" target="_blank" rel="noopener noreferrer">
