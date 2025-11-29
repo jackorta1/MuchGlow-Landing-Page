@@ -74,10 +74,10 @@ const CompactLanding: React.FC<CompactLandingProps> = ({ lang = 'en' }) => {
         contact: 'Contact'
       },
       hero: {
-        badge: 'Premium Beauty & Wellness Platform',
-        title: 'Your Beauty & Wellness,',
+        badge: 'Premium Wellness & Lifestyle Platform',
+        title: 'Your Wellness & Lifestyle,',
         titleHighlight: 'Perfectly Scheduled',
-        subtitle: 'Book premium treatments at top salons, clinics, spas & wellness centers. Pay flexibly with Tabby & Tamara.',
+        subtitle: 'Book premium treatments at top salons, clinics, spas, gyms & fitness centers. Pay flexibly with Tabby & Tamara.',
         ctaPrimary: 'Get Started',
         ctaSecondary: 'Be a Partner',
         paymentLabel: 'Supported Payments:'
@@ -85,12 +85,13 @@ const CompactLanding: React.FC<CompactLandingProps> = ({ lang = 'en' }) => {
       services: {
         label: 'Our Services',
         title: 'What We Offer',
-        subtitle: 'Everything you need for your beauty & wellness business',
+        subtitle: 'Everything you need for your wellness & lifestyle business',
         items: [
           { icon: '🎁', title: 'Gift Cards System', desc: 'Digital gift cards with instant delivery' },
           { icon: '💇', title: 'Salon & Spa', desc: 'Book appointments at premium salons & spas' },
           { icon: '🏥', title: 'Clinics & Wellness', desc: 'Medical aesthetics & wellness centers' },
-          { icon: '🏢', title: 'Corporate Gifts', desc: 'Bulk gifting solutions for businesses' }
+          { icon: '💪', title: 'Gym & Fitness', desc: 'Personal training & fitness memberships' },
+          { icon: '🏢', title: 'Corporate Wellness', desc: 'Bulk gifting solutions for businesses' }
         ]
       },
       whyUs: {
@@ -107,9 +108,9 @@ const CompactLanding: React.FC<CompactLandingProps> = ({ lang = 'en' }) => {
         label: 'Simple Process',
         title: 'How It Works',
         steps: [
-          { num: '1', title: 'Discover', desc: 'Browse salons, clinics & spas' },
+          { num: '1', title: 'Discover', desc: 'Browse salons, clinics, gyms & spas' },
           { num: '2', title: 'Book', desc: 'Choose your time & pay' },
-          { num: '3', title: 'Glow', desc: 'Enjoy your treatment' }
+          { num: '3', title: 'Transform', desc: 'Enjoy your experience' }
         ]
       },
       payment: {
@@ -120,11 +121,11 @@ const CompactLanding: React.FC<CompactLandingProps> = ({ lang = 'en' }) => {
         stripe: 'Secure card payments'
       },
       gift: {
-        title: "Glow Someone's Day",
-        subtitle: 'Send a Beauty & Wellness Gift Instantly',
-        description: 'Send salon, clinic, spa, or wellness experiences to your loved ones in just a few taps.',
+        title: "Make Someone's Day",
+        subtitle: 'Send a Wellness Gift Instantly',
+        description: 'Send salon, clinic, spa, gym, or fitness experiences to your loved ones in just a few taps.',
         steps: [
-          { num: '1', icon: '🏰', title: 'Pick a Destination', desc: 'Choose from premium salons, clinics, spas & wellness centers' },
+          { num: '1', icon: '🏰', title: 'Pick a Destination', desc: 'Choose from premium salons, clinics, gyms, spas & fitness centers' },
           { num: '2', icon: '🎨', title: 'Customize Your Gift', desc: 'Select amount and pick a beautiful card theme' },
           { num: '3', icon: '💝', title: 'Send with Love', desc: 'Instantly deliver joy to friends and loved ones' }
         ],
@@ -133,12 +134,12 @@ const CompactLanding: React.FC<CompactLandingProps> = ({ lang = 'en' }) => {
         recipientContact: 'Phone or email',
         sendButton: 'Send Gift Now',
         cta: 'Send a Gift Now',
-        cardThemes: ['Rose Gold', 'Champagne', 'Blush Pink', 'Deep Plum']
+        cardThemes: ['Ocean Teal', 'Champagne', 'Royal Gold', 'Deep Navy']
       },
       partner: {
         label: 'Join Us',
         title: 'Become a Partner',
-        subtitle: 'Grow your salon, clinic, or wellness business with MuchGlow',
+        subtitle: 'Grow your salon, clinic, gym, or wellness business with MuchGlow',
         benefits: [
           'Access 50,000+ active users',
           'Zero commission first 3 months',
@@ -157,7 +158,7 @@ const CompactLanding: React.FC<CompactLandingProps> = ({ lang = 'en' }) => {
           message: 'Message (Optional)'
         },
         countries: ['UAE', 'Saudi Arabia', 'Kuwait', 'Qatar', 'Bahrain', 'Oman'],
-        businessTypes: ['Salon', 'Spa', 'Aesthetic Clinic', 'Medical Clinic', 'Beauty Center', 'Wellness Center', 'Gym/Fitness', 'Other'],
+        businessTypes: ['Salon', 'Spa', 'Aesthetic Clinic', 'Medical Clinic', 'Wellness Center', 'Gym', 'Fitness Center', 'Personal Training', 'Other'],
         submit: 'Submit Application',
         submitting: 'Submitting...',
         success: 'Application submitted! We\'ll contact you within 24 hours.'
@@ -167,13 +168,13 @@ const CompactLanding: React.FC<CompactLandingProps> = ({ lang = 'en' }) => {
         title: 'What Our Clients Say',
         items: [
           { name: 'Sara Al-Rashid', role: 'Regular Customer', rating: 5, text: 'MuchGlow made booking my clinic and spa appointments so easy! The gift card feature is perfect for surprising friends.' },
-          { name: 'Dr. Fatima Hassan', role: 'Clinic Owner', rating: 5, text: 'As a clinic partner, MuchGlow has increased our bookings by 40%. The platform is professional and easy to use.' },
-          { name: 'Noor Ahmed', role: 'Beauty Enthusiast', rating: 5, text: 'Love the flexible payment options! Tabby integration means I can enjoy premium treatments at salons and clinics.' },
-          { name: 'Layla Mohammed', role: 'Corporate Client', rating: 5, text: 'We use MuchGlow for all our employee wellness gifts at clinics and spas. The bulk ordering is fantastic!' }
+          { name: 'Ahmed Hassan', role: 'Gym Owner', rating: 5, text: 'As a gym partner, MuchGlow has increased our memberships by 40%. The platform is professional and easy to use.' },
+          { name: 'Khalid Omar', role: 'Fitness Enthusiast', rating: 5, text: 'Love the flexible payment options! I can book gym sessions and spa treatments all in one place.' },
+          { name: 'Layla Mohammed', role: 'Corporate Client', rating: 5, text: 'We use MuchGlow for all our employee wellness gifts - gyms, spas, and clinics. The bulk ordering is fantastic!' }
         ]
       },
       footer: {
-        desc: 'MuchGlow simplifies booking at salons, clinics, spas & wellness centers. In-person or virtual consultations.',
+        desc: 'MuchGlow simplifies booking at salons, clinics, gyms, spas & fitness centers. In-person or virtual consultations.',
         headOffice: 'Head Office',
         address: 'Al Ain, UAE',
         getApp: 'Get the App',
@@ -193,10 +194,10 @@ const CompactLanding: React.FC<CompactLandingProps> = ({ lang = 'en' }) => {
         contact: 'اتصل بنا'
       },
       hero: {
-        badge: 'منصة الجمال والعافية المتميزة',
-        title: 'جمالك وعافيتك،',
+        badge: 'منصة العافية ونمط الحياة المتميزة',
+        title: 'عافيتك ونمط حياتك،',
         titleHighlight: 'مجدول بإتقان',
-        subtitle: 'احجز علاجات متميزة في أفضل الصالونات والعيادات والمنتجعات ومراكز العافية. ادفع بمرونة مع تابي وتمارا.',
+        subtitle: 'احجز علاجات متميزة في أفضل الصالونات والعيادات والمنتجعات والنوادي الرياضية ومراكز اللياقة. ادفع بمرونة مع تابي وتمارا.',
         ctaPrimary: 'ابدأ الآن',
         ctaSecondary: 'كن شريكاً',
         paymentLabel: 'طرق الدفع المدعومة:'
@@ -204,12 +205,13 @@ const CompactLanding: React.FC<CompactLandingProps> = ({ lang = 'en' }) => {
       services: {
         label: 'خدماتنا',
         title: 'ما نقدمه',
-        subtitle: 'كل ما تحتاجه لأعمال الجمال والعافية الخاصة بك',
+        subtitle: 'كل ما تحتاجه لأعمال العافية ونمط الحياة الخاصة بك',
         items: [
           { icon: '🎁', title: 'نظام بطاقات الهدايا', desc: 'بطاقات هدايا رقمية بتوصيل فوري' },
           { icon: '💇', title: 'الصالونات والسبا', desc: 'احجز مواعيد في صالونات ومنتجعات متميزة' },
           { icon: '🏥', title: 'العيادات والعافية', desc: 'التجميل الطبي ومراكز العافية' },
-          { icon: '🏢', title: 'هدايا الشركات', desc: 'حلول إهداء جماعية للشركات' }
+          { icon: '💪', title: 'النوادي واللياقة', desc: 'تدريب شخصي واشتراكات لياقة' },
+          { icon: '🏢', title: 'عافية الشركات', desc: 'حلول إهداء جماعية للشركات' }
         ]
       },
       whyUs: {
@@ -226,9 +228,9 @@ const CompactLanding: React.FC<CompactLandingProps> = ({ lang = 'en' }) => {
         label: 'عملية بسيطة',
         title: 'كيف يعمل',
         steps: [
-          { num: '1', title: 'اكتشف', desc: 'تصفح الصالونات والعيادات والمنتجعات' },
+          { num: '1', title: 'اكتشف', desc: 'تصفح الصالونات والعيادات والنوادي والمنتجعات' },
           { num: '2', title: 'احجز', desc: 'اختر وقتك وادفع' },
-          { num: '3', title: 'تألق', desc: 'استمتع بعلاجك' }
+          { num: '3', title: 'تحوّل', desc: 'استمتع بتجربتك' }
         ]
       },
       payment: {
@@ -239,11 +241,11 @@ const CompactLanding: React.FC<CompactLandingProps> = ({ lang = 'en' }) => {
         stripe: 'دفعات بطاقة آمنة'
       },
       gift: {
-        title: 'أضئ يوم شخص ما',
-        subtitle: 'أرسل هدية جمال وعافية فورية',
-        description: 'أرسل تجارب الصالون والعيادة والسبا ومراكز العافية لأحبائك ببضع نقرات.',
+        title: 'اصنع يوماً مميزاً',
+        subtitle: 'أرسل هدية عافية فورية',
+        description: 'أرسل تجارب الصالون والعيادة والسبا والنادي الرياضي ومراكز اللياقة لأحبائك ببضع نقرات.',
         steps: [
-          { num: '1', icon: '🏰', title: 'اختر الوجهة', desc: 'اختر من الصالونات والعيادات والمنتجعات ومراكز العافية' },
+          { num: '1', icon: '🏰', title: 'اختر الوجهة', desc: 'اختر من الصالونات والعيادات والنوادي والمنتجعات ومراكز اللياقة' },
           { num: '2', icon: '🎨', title: 'خصص هديتك', desc: 'اختر المبلغ وتصميم البطاقة الجميل' },
           { num: '3', icon: '💝', title: 'أرسل بحب', desc: 'اسعد أصدقاءك وأحبائك فوراً' }
         ],
@@ -252,12 +254,12 @@ const CompactLanding: React.FC<CompactLandingProps> = ({ lang = 'en' }) => {
         recipientContact: 'الهاتف أو البريد',
         sendButton: 'أرسل الهدية الآن',
         cta: 'أرسل هدية الآن',
-        cardThemes: ['ذهبي وردي', 'شامبانيا', 'وردي خفيف', 'بنفسجي غامق']
+        cardThemes: ['أزرق محيطي', 'شامبانيا', 'ذهبي ملكي', 'كحلي غامق']
       },
       partner: {
         label: 'انضم إلينا',
         title: 'كن شريكاً',
-        subtitle: 'طوّر أعمال الصالون أو العيادة أو مركز العافية مع ماتش جلو',
+        subtitle: 'طوّر أعمال الصالون أو العيادة أو النادي الرياضي أو مركز العافية مع ماتش جلو',
         benefits: [
           'الوصول إلى أكثر من 50,000 مستخدم نشط',
           'صفر عمولة لأول 3 أشهر',
@@ -276,7 +278,7 @@ const CompactLanding: React.FC<CompactLandingProps> = ({ lang = 'en' }) => {
           message: 'رسالة (اختياري)'
         },
         countries: ['الإمارات', 'السعودية', 'الكويت', 'قطر', 'البحرين', 'عُمان'],
-        businessTypes: ['صالون', 'سبا', 'عيادة تجميل', 'عيادة طبية', 'مركز تجميل', 'مركز عافية', 'نادي رياضي', 'أخرى'],
+        businessTypes: ['صالون', 'سبا', 'عيادة تجميل', 'عيادة طبية', 'مركز عافية', 'نادي رياضي', 'مركز لياقة', 'تدريب شخصي', 'أخرى'],
         submit: 'إرسال الطلب',
         submitting: 'جاري الإرسال...',
         success: 'تم إرسال الطلب! سنتواصل معك خلال 24 ساعة.'
@@ -286,13 +288,13 @@ const CompactLanding: React.FC<CompactLandingProps> = ({ lang = 'en' }) => {
         title: 'ماذا يقول عملاؤنا',
         items: [
           { name: 'سارة الراشد', role: 'عميلة منتظمة', rating: 5, text: 'ماتش جلو جعل حجز مواعيد العيادات والسبا سهلاً جداً! ميزة بطاقات الهدايا مثالية لمفاجأة الأصدقاء.' },
-          { name: 'د. فاطمة حسن', role: 'صاحبة عيادة', rating: 5, text: 'كشريك عيادة، زاد ماتش جلو حجوزاتنا بنسبة 40%. المنصة احترافية وسهلة الاستخدام.' },
-          { name: 'نور أحمد', role: 'عاشقة الجمال', rating: 5, text: 'أحب خيارات الدفع المرنة! تكامل تابي يعني أنني أستطيع الاستمتاع بعلاجات الصالونات والعيادات.' },
-          { name: 'ليلى محمد', role: 'عميلة شركات', rating: 5, text: 'نستخدم ماتش جلو لجميع هدايا العافية للموظفين في العيادات والمنتجعات. نظام الطلب بالجملة رائع!' }
+          { name: 'أحمد حسن', role: 'صاحب نادي رياضي', rating: 5, text: 'كشريك نادي رياضي، زاد ماتش جلو اشتراكاتنا بنسبة 40%. المنصة احترافية وسهلة الاستخدام.' },
+          { name: 'خالد عمر', role: 'عاشق اللياقة', rating: 5, text: 'أحب خيارات الدفع المرنة! أستطيع حجز تمارين النادي والسبا في مكان واحد.' },
+          { name: 'ليلى محمد', role: 'عميلة شركات', rating: 5, text: 'نستخدم ماتش جلو لجميع هدايا العافية للموظفين - النوادي والمنتجعات والعيادات. نظام الطلب بالجملة رائع!' }
         ]
       },
       footer: {
-        desc: 'ماتش جلو يسهّل الحجز في الصالونات والعيادات والمنتجعات ومراكز العافية. حضورياً أو افتراضياً.',
+        desc: 'ماتش جلو يسهّل الحجز في الصالونات والعيادات والنوادي والمنتجعات ومراكز اللياقة. حضورياً أو افتراضياً.',
         headOffice: 'المكتب الرئيسي',
         address: 'العين، الإمارات',
         getApp: 'حمّل التطبيق',
@@ -549,7 +551,7 @@ const CompactLanding: React.FC<CompactLandingProps> = ({ lang = 'en' }) => {
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                   {['Free Digital Marketing', 'Instant Client Access', 'Advanced Analytics', '24/7 Support'].map((item, i) => (
                     <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                      <CheckCircle size={18} color="#E75481" />
+                      <CheckCircle size={18} color="#0891B2" />
                       <span style={{ fontSize: '0.9rem' }}>{item}</span>
                     </div>
                   ))}
@@ -624,10 +626,10 @@ const CompactLanding: React.FC<CompactLandingProps> = ({ lang = 'en' }) => {
                     {/* Gift Card Themes */}
                     <div className="mg-gift-cards-row">
                       {[
-                        { theme: t.gift.cardThemes[0], color: '#E8B4B8' },
+                        { theme: t.gift.cardThemes[0], color: '#0891B2' },
                         { theme: t.gift.cardThemes[1], color: '#F7E7CE' },
-                        { theme: t.gift.cardThemes[2], color: '#FFE5EC' },
-                        { theme: t.gift.cardThemes[3], color: '#6B3AA0' }
+                        { theme: t.gift.cardThemes[2], color: '#D97706' },
+                        { theme: t.gift.cardThemes[3], color: '#1E3A5F' }
                       ].map((card, idx) => (
                         <motion.div
                           key={idx}
@@ -773,10 +775,10 @@ const CompactLanding: React.FC<CompactLandingProps> = ({ lang = 'en' }) => {
             <p className="mg-showcase-label">Choose from beautiful gift card designs</p>
             <div className="mg-showcase-cards">
               {[
-                { theme: t.gift.cardThemes[0], color: '#E8B4B8' },
+                { theme: t.gift.cardThemes[0], color: '#0891B2' },
                 { theme: t.gift.cardThemes[1], color: '#F7E7CE' },
-                { theme: t.gift.cardThemes[2], color: '#FFE5EC' },
-                { theme: t.gift.cardThemes[3], color: '#6B3AA0' }
+                { theme: t.gift.cardThemes[2], color: '#D97706' },
+                { theme: t.gift.cardThemes[3], color: '#1E3A5F' }
               ].map((card, idx) => (
                 <motion.div
                   key={idx}
@@ -895,7 +897,7 @@ const CompactLanding: React.FC<CompactLandingProps> = ({ lang = 'en' }) => {
                   boxShadow: '0 20px 50px rgba(0,0,0,0.2)'
                 }}
               >
-                <CreditCard size={60} color="#E75481" />
+                <CreditCard size={60} color="#0891B2" />
                 <h3 style={{ color: '#1a1518', marginTop: '1rem' }}>0% Interest</h3>
                 <p style={{ color: '#666' }}>Pay Later, Glow Now</p>
               </motion.div>
@@ -1149,7 +1151,7 @@ const CompactLanding: React.FC<CompactLandingProps> = ({ lang = 'en' }) => {
           </div>
 
           <div className="mg-footer-bottom">
-            <p><strong style={{ color: '#E75481' }}>MuchGlow</strong> - {t.footer.copyright} &copy; {new Date().getFullYear()}</p>
+            <p><strong style={{ color: '#0891B2' }}>MuchGlow</strong> - {t.footer.copyright} &copy; {new Date().getFullYear()}</p>
           </div>
         </div>
       </footer>

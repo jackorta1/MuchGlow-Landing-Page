@@ -1,26 +1,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 :root{
-  --textHadd: #1a1518;
-  --textHPara: #4a4145;
-  --colored: #E75481;
-  --coloredHover: #d43a69;
-  --lightBg: #FFF8F8;
-  --shadowColor: rgba(231, 84, 129, 0.1);
-  
-  /* Stunning Gradients */
-  --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  --gradient-hero: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  --textHadd: #1a1a1f;
+  --textHPara: #4a4a52;
+  --colored: #0891B2;
+  --coloredHover: #0e7490;
+  --lightBg: #F5FAFA;
+  --shadowColor: rgba(8, 145, 178, 0.1);
+
+  /* Gender-Neutral Gradients - Teal, Blue & Gold */
+  --gradient-primary: linear-gradient(135deg, #0891B2 0%, #0EA5E9 100%);
+  --gradient-hero: linear-gradient(135deg, #0891B2 0%, #D97706 100%);
   --gradient-secondary: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-  --gradient-warm: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-  --gradient-sunset: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
-  --gradient-text: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  
-  /* Vibrant Colors */
-  --neon-pink: #ff006e;
+  --gradient-warm: linear-gradient(135deg, #D97706 0%, #F59E0B 100%);
+  --gradient-sunset: linear-gradient(135deg, #E0F7FA 0%, #FEF3C7 100%);
+  --gradient-text: linear-gradient(135deg, #0891B2 0%, #D97706 100%);
+
+  /* Vibrant Colors - Gender Neutral */
+  --teal-primary: #0891B2;
   --electric-blue: #3a86ff;
-  --sunny-yellow: #ffd60a;
+  --gold-accent: #D97706;
   --mint-green: #06ffa5;
-  --purple-magic: #7209b7;
+  --deep-teal: #0e7490;
 }
 
 p{color: var(--textHPara); line-height:26px!important;}
@@ -108,7 +108,7 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ff006e' fill-opacity='0.05'%3E%3Ccircle cx='7' cy='7' r='7'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%230891B2' fill-opacity='0.05'%3E%3Ccircle cx='7' cy='7' r='7'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
   animation: float 20s ease-in-out infinite;
   pointer-events: none;
   z-index: -1;
@@ -176,10 +176,10 @@ a {
 .custoHeroPoints{
   background: linear-gradient(145deg, #ffffff, #f0f0f0);
   padding: 25px;
-  box-shadow: 
-    0px 10px 30px rgba(231, 84, 129, 0.3),
+  box-shadow:
+    0px 10px 30px rgba(8, 145, 178, 0.3),
     0px 0px 20px rgba(255, 255, 255, 0.8) inset;
-  border-radius: 25px; 
+  border-radius: 25px;
   min-width: 150px;
   max-width: 300px;
   border: 2px solid transparent;
@@ -343,7 +343,7 @@ max-width:300px;
 .details{margin:2%;}
 
 .salonBg{
-  background:#FFF8F8; padding:4% 0;
+  background:#F5FAFA; padding:4% 0;
 }
 
 

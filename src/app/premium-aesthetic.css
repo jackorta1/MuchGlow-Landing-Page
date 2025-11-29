@@ -17,11 +17,11 @@
   --premium-shadow-lg: 0 20px 60px rgba(102, 126, 234, 0.2);
   --premium-shadow-xl: 0 30px 80px rgba(102, 126, 234, 0.25);
   
-  --glow-pink: 0 0 30px rgba(231, 84, 129, 0.4);
-  --glow-purple: 0 0 30px rgba(107, 58, 160, 0.4);
+  --glow-teal: 0 0 30px rgba(8, 145, 178, 0.4);
+  --glow-gold: 0 0 30px rgba(217, 119, 6, 0.4);
   --glow-blue: 0 0 30px rgba(79, 172, 254, 0.4);
   
-  --border-gradient: linear-gradient(90deg, #667eea, #764ba2, #f5576c);
+  --border-gradient: linear-gradient(90deg, #0891B2, #0EA5E9, #D97706);
   --border-radius-sm: 12px;
   --border-radius-md: 20px;
   --border-radius-lg: 30px;
@@ -175,7 +175,7 @@ body::before {
 
 .btn-luxury:hover {
   transform: translateY(-3px);
-  box-shadow: var(--premium-shadow-lg), var(--glow-purple);
+  box-shadow: var(--premium-shadow-lg), var(--glow-teal);
 }
 
 .btn-luxury-outline {
