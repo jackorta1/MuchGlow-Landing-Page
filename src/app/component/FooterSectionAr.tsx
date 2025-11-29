@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import Link from "next/link";
-import SalLogo from "../../../public/salonglow.png";
+import SalLogo from "../../../public/muchglow.png";
 import Image from "next/image";
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faLinkedinIn, faInstagram } from '@fortawesome/free-brands-svg-icons';

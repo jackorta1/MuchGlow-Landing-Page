@@ -101,16 +101,20 @@ const GiftTransferSection = () => {
                     </div>
                     <div className="gift-amount">
                       <div className="amount-options">
-                        <button className="amount-btn">100 AED</button>
-                        <button className="amount-btn active">200 AED</button>
-                        <button className="amount-btn">500 AED</button>
+                        <button className="amount-btn-enhanced">100 AED</button>
+                        <button className="amount-btn-enhanced active">200 AED</button>
+                        <button className="amount-btn-enhanced">500 AED</button>
                       </div>
                     </div>
                     <div className="recipient-input">
                       <input type="text" placeholder="Recipient's name" />
                       <input type="text" placeholder="Phone or email" />
                     </div>
-                    <button className="send-gift-btn">Send Gift Now</button>
+                    <button className="btn-muchglow send-gift-btn-enhanced">
+                      <span className="gift-icon">🎁</span>
+                      Send Gift Now
+                      <span className="urgency-badge">Limited Offer!</span>
+                    </button>
                   </div>
                 </div>
               </div>
@@ -183,14 +187,16 @@ const GiftTransferSection = () => {
           viewport={{ once: true }}
         >
           <motion.button 
-            className="btn btn-primary btn-lg gift-cta-btn"
+            className="btn-muchglow btn-partnership-primary gift-cta-btn"
             whileHover={{ 
               scale: 1.05,
               boxShadow: '0 0 30px rgba(231, 84, 129, 0.4)'
             }}
             whileTap={{ scale: 0.95 }}
           >
+            <span className="gift-icon">🎁</span>
             Send a Gift Now
+            <span className="arrow-icon">→</span>
           </motion.button>
         </motion.div>
 

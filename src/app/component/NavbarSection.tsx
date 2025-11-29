@@ -4,7 +4,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar'; 
 import React from 'react';
 import Link from 'next/link';
-import Logo from "../../../public/logo.png";
+import Logo from "../../../public/muchglow.png";
 import Image from 'next/image';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faLinkedinIn, faInstagram } from '@fortawesome/free-brands-svg-icons';
@@ -18,7 +18,7 @@ const NavbarSection = () => {
       <Navbar collapseOnSelect expand="lg">
         <Container>
           <Navbar.Brand href="/">
-            <Image src={Logo} width={150} className='img-fluid'  alt="Logo" />
+            <Image src={Logo} width={200} className='img-fluid'  alt="Logo" />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">

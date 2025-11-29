@@ -56,10 +56,10 @@ const HeroSection = () => {
           <div className="col-lg-7 col-md-12 col-12">
             <div className="custAlign">
               <h1 className="gradient-hero-text fw-bold display-4 mb-4">
-                ✨ Your Personal Salon Assistant 💅
+                ✨ Your Personal Beauty Assistant 💅
               </h1>
               <p className="hadd fw-normal fs-5 mb-4">
-                🌟 MuchGlow makes Salon bookings effortless for in-Salon, express,
+                🌟 MuchGlow makes beauty bookings effortless for in-center, express,
                 or curbside services, while enhancing client loyalty with
                 tailored rewards! 🎁💖
               </p>
@@ -85,7 +85,7 @@ const HeroSection = () => {
                     width={550}
                     height={582}
                     className="img-fluid custWidth"
-                    alt="MuchGlow mobile app interface showing salon booking features"
+                    alt="MuchGlow mobile app interface showing beauty booking features"
                     priority
                   />
                 </div>

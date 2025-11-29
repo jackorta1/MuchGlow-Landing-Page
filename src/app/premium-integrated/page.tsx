@@ -1,13 +1,13 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Search, Star, Gift, Clock, Shield, CreditCard, Sparkles, Users, Download, ChevronRight, Check, Phone, Mail, MapPin, Facebook, Instagram, Twitter, Heart, Calendar, Award, TrendingUp, Zap, Palette, UserCheck, Brain } from 'lucide-react';
-import Image from 'next/image';
+import { Search, Star, Gift, Shield, CreditCard, Sparkles, Download, ChevronRight, Check, Heart, Calendar, Award, TrendingUp, Brain } from 'lucide-react';
 import Link from 'next/link';
 
 // Import existing components
 import NavbarSection from '../component/NavbarSection';
+import UnifiedNavigation from '../component/UnifiedNavigation';
 import PartnerHeroSection from '../component/PartnerHeroSection';
 import TrustBadges from '../component/TrustBadges';
 import AboutAppSection from '../component/AboutAppSection';
@@ -18,6 +18,7 @@ import SalonClients from '../component/SalonClients';
 import TestimonialsSection from '../component/TestimonialsSection';
 import AIBeautySection from '../component/AIBeautySection';
 import GiftTransferSection from '../component/GiftTransferSection';
+import GymFitnessSection from '../component/GymFitnessSection';
 import AppShowcase from '../component/AppShowcase';
 import GalleryySection from '../component/GalleryySection';
 import PremiumPartnerSection from '../component/PremiumPartnerSection';
@@ -27,10 +28,9 @@ import FooterSection from '../component/FooterSection';
 // Import styles
 import '../muchglow-premium.css';
 import '../premium-animations.css';
+import '../gym-fitness.css';
 
 const PremiumIntegratedLanding = () => {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [activeTestimonial, setActiveTestimonial] = useState(0);
 
   // Top Services Data
   const topServices = [
@@ -56,11 +56,13 @@ const PremiumIntegratedLanding = () => {
 
   return (
     <div className="premium-landing">
-      {/* Original Navbar */}
-      <NavbarSection />
+      {/* Unified Navigation with Beauty/Fitness Toggle */}
+      <UnifiedNavigation />
       
-      {/* Partner Hero Section from Original */}
-      <PartnerHeroSection />
+      {/* Add padding to account for fixed navigation */}
+      <div style={{ paddingTop: '80px' }}>
+        {/* Partner Hero Section from Original */}
+        <PartnerHeroSection />
 
 
       {/* Original Trust Badges */}
@@ -182,7 +184,13 @@ const PremiumIntegratedLanding = () => {
         position: 'relative',
         overflow: 'hidden'
       }}>
-        <div style={{
+        <motion.div
+          animate={{ 
+            scale: [1, 1.2, 1],
+            opacity: [0.08, 0.12, 0.08]
+          }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          style={{
           position: 'absolute',
           top: '10%',
           left: '5%',
@@ -192,7 +200,13 @@ const PremiumIntegratedLanding = () => {
           borderRadius: '50%',
           filter: 'blur(40px)'
         }} />
-        <div style={{
+        <motion.div
+          animate={{ 
+            scale: [1, 1.3, 1],
+            opacity: [0.06, 0.1, 0.06]
+          }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+          style={{
           position: 'absolute',
           bottom: '10%',
           right: '5%',
@@ -255,69 +269,112 @@ const PremiumIntegratedLanding = () => {
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5, delay: index * 0.05 }}
                 viewport={{ once: true }}
+                className="service-card-premium"
                 style={{
-                  background: 'linear-gradient(145deg, #ffffff, #f8f8f8)',
-                  borderRadius: '20px',
-                  padding: '2rem',
+                  background: 'linear-gradient(145deg, #ffffff, #fafafa)',
+                  borderRadius: '24px',
+                  padding: '2.5rem 2rem',
                   textAlign: 'center',
                   cursor: 'pointer',
                   position: 'relative',
-                  border: '1px solid rgba(231, 84, 129, 0.1)',
-                  boxShadow: '0 10px 30px rgba(0, 0, 0, 0.08)',
-                  transition: 'all 0.3s ease',
-                  overflow: 'hidden'
+                  border: '1px solid rgba(231, 84, 129, 0.08)',
+                  boxShadow: '0 8px 25px rgba(0, 0, 0, 0.06), 0 2px 8px rgba(231, 84, 129, 0.08)',
+                  transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+                  overflow: 'hidden',
+                  backdropFilter: 'blur(10px)'
                 }}
                 whileHover={{ 
-                  y: -8,
+                  y: -10,
                   scale: 1.05,
-                  transition: { duration: 0.2 }
+                  rotateY: 5,
+                  transition: { duration: 0.3, type: "spring", stiffness: 300 }
                 }}
                 onHoverStart={(e) => {
-                  e.currentTarget.style.boxShadow = '0 15px 40px rgba(231, 84, 129, 0.25)';
-                  e.currentTarget.style.background = 'linear-gradient(145deg, #fff5f7, #ffe0e6)';
-                  e.currentTarget.style.borderColor = 'rgba(231, 84, 129, 0.3)';
+                  const target = e.currentTarget as HTMLElement;
+                  if (target) {
+                    target.style.boxShadow = '0 20px 50px rgba(231, 84, 129, 0.3), 0 10px 20px rgba(255, 215, 0, 0.1)';
+                    target.style.background = 'linear-gradient(145deg, #fff8fa, #fff0f4)';
+                    target.style.borderColor = 'rgba(231, 84, 129, 0.25)';
+                    target.style.transform = 'perspective(1000px)';
+                  }
                 }}
                 onHoverEnd={(e) => {
-                  e.currentTarget.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.08)';
-                  e.currentTarget.style.background = 'linear-gradient(145deg, #ffffff, #f8f8f8)';
-                  e.currentTarget.style.borderColor = 'rgba(231, 84, 129, 0.1)';
+                  const target = e.currentTarget as HTMLElement;
+                  if (target) {
+                    target.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.06), 0 2px 8px rgba(231, 84, 129, 0.08)';
+                    target.style.background = 'linear-gradient(145deg, #ffffff, #fafafa)';
+                    target.style.borderColor = 'rgba(231, 84, 129, 0.08)';
+                    target.style.transform = 'perspective(1000px)';
+                  }
                 }}
               >
                 {service.popular && (
                   <motion.div
-                    animate={{ rotate: [-2, 2, -2] }}
-                    transition={{ duration: 2, repeat: Infinity }}
+                    animate={{ 
+                      rotate: [-3, 3, -3],
+                      scale: [1, 1.05, 1]
+                    }}
+                    transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
                     style={{
                       position: 'absolute',
                       top: '15px',
                       right: '15px',
                       background: 'linear-gradient(135deg, #FFD700, #FFA500)',
                       color: 'white',
-                      padding: '0.35rem 1rem',
-                      borderRadius: '20px',
-                      fontSize: '0.7rem',
-                      fontWeight: '700',
+                      padding: '0.4rem 1.2rem',
+                      borderRadius: '25px',
+                      fontSize: '0.75rem',
+                      fontWeight: '800',
                       textTransform: 'uppercase',
                       letterSpacing: '0.5px',
-                      boxShadow: '0 4px 12px rgba(255, 215, 0, 0.4)'
+                      boxShadow: '0 6px 20px rgba(255, 215, 0, 0.5)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.3rem'
                     }}
                   >
-                    ⭐ POPULAR
+                    <motion.span
+                      animate={{ rotate: [0, 360] }}
+                      transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                      style={{ display: 'inline-block' }}
+                    >⭐</motion.span>
+                    POPULAR
                   </motion.div>
                 )}
                 <motion.div 
                   style={{ 
                     fontSize: '3.5rem', 
-                    marginBottom: '1rem',
+                    marginBottom: '1.5rem',
                     background: 'linear-gradient(135deg, #E75481, #FF6B9D)',
                     WebkitBackgroundClip: 'text',
                     WebkitTextFillColor: 'transparent',
-                    filter: 'drop-shadow(0 2px 4px rgba(231, 84, 129, 0.2))'
+                    filter: 'drop-shadow(0 3px 6px rgba(231, 84, 129, 0.25))',
+                    display: 'inline-block',
+                    position: 'relative'
                   }}
-                  animate={{ scale: [1, 1.1, 1] }}
-                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                  animate={{ 
+                    scale: [1, 1.15, 1],
+                    rotate: [0, 5, -5, 0]
+                  }}
+                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                  whileHover={{
+                    scale: 1.3,
+                    rotate: 360,
+                    transition: { duration: 0.5 }
+                  }}
                 >
                   {service.icon}
+                  <motion.div
+                    style={{
+                      position: 'absolute',
+                      inset: '-10px',
+                      background: 'radial-gradient(circle, rgba(231, 84, 129, 0.1) 0%, transparent 70%)',
+                      borderRadius: '50%',
+                      zIndex: -1
+                    }}
+                    animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.8, 0.5] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                  />
                 </motion.div>
                 <h4 style={{
                   fontSize: '1.25rem',
@@ -332,20 +389,28 @@ const PremiumIntegratedLanding = () => {
                   color: '#636e72',
                   lineHeight: '1.5'
                 }}>{service.description}</p>
-                <div style={{ 
-                  background: 'linear-gradient(135deg, #E75481, #FF6B9D)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  fontWeight: '700',
-                  fontSize: '1.1rem',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: '0.5rem'
-                }}>
-                  <span style={{ fontSize: '0.9rem' }}>💰</span>
+                <motion.div 
+                  style={{ 
+                    background: 'linear-gradient(135deg, #E75481, #FF6B9D)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    fontWeight: '700',
+                    fontSize: '1.15rem',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '0.5rem'
+                  }}
+                  whileHover={{ scale: 1.1 }}
+                  transition={{ type: "spring", stiffness: 400 }}
+                >
+                  <motion.span 
+                    style={{ fontSize: '0.95rem' }}
+                    animate={{ rotate: [0, 20, -20, 0] }}
+                    transition={{ duration: 2, repeat: Infinity, delay: index * 0.1 }}
+                  >💰</motion.span>
                   {service.price}
-                </div>
+                </motion.div>
                 <motion.div
                   style={{
                     position: 'absolute',
@@ -368,6 +433,9 @@ const PremiumIntegratedLanding = () => {
 
       {/* Original Payment Feature */}
       <PaymentFeature />
+
+      {/* New Gym & Fitness Section */}
+      <GymFitnessSection />
 
       {/* Original Clinic Services */}
       <ClinicServices />
@@ -662,6 +730,7 @@ const PremiumIntegratedLanding = () => {
 
       {/* Original Footer */}
       <FooterSection />
+      </div>
     </div>
   );
 };

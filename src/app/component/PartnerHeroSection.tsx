@@ -164,55 +164,67 @@ const PartnerHeroSection = () => {
                 </div>
 
                 {/* CTA Buttons */}
-                <div className="hero-cta-group">
+                <div className="hero-cta-group btn-group-hero">
                   <motion.button
-                    className="btn-primary-hero"
+                    className="btn-muchglow btn-partnership-primary"
                     onClick={() => setIsFormVisible(!isFormVisible)}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
+                    <span>🚀</span>
                     <span>Start Partnership Now</span>
-                    <span className="btn-arrow">→</span>
-                    <span style={{
-                      position: 'absolute',
-                      top: '-8px',
-                      right: '-8px',
-                      background: '#FFD700',
-                      color: '#E75481',
-                      borderRadius: '50%',
-                      width: '24px',
-                      height: '24px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      fontSize: '12px',
-                      fontWeight: 'bold',
-                      animation: 'bounce 2s infinite',
-                      boxShadow: '0 2px 8px rgba(255, 215, 0, 0.5)'
-                    }}>✨</span>
+                    <span className="arrow-icon">→</span>
+                    <span className="new-badge">✨</span>
                   </motion.button>
-                  <a href="mailto:sales@muchglow.com" className="btn-secondary-hero">
+                  <a href="mailto:sales@muchglow.com" className="btn-muchglow btn-partnership-secondary">
+                    <span>📧</span>
                     <span>Contact Sales</span>
                   </a>
                 </div>
 
                 {/* Trust Indicators */}
-                <div className="trust-indicators">
-                  <div className="indicator">
-                    <span className="indicator-number">500+</span>
+                <motion.div 
+                  className="trust-indicators"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.6, duration: 0.6 }}
+                >
+                  <motion.div 
+                    className="indicator"
+                    whileHover={{ scale: 1.1 }}
+                  >
+                    <motion.span 
+                      className="indicator-number"
+                      animate={{ scale: [1, 1.05, 1] }}
+                      transition={{ duration: 2, repeat: Infinity }}
+                    >500+</motion.span>
                     <span className="indicator-label">Partner Businesses</span>
-                  </div>
+                  </motion.div>
                   <div className="indicator-divider"></div>
-                  <div className="indicator">
-                    <span className="indicator-number">4.8⭐</span>
+                  <motion.div 
+                    className="indicator"
+                    whileHover={{ scale: 1.1 }}
+                  >
+                    <motion.span 
+                      className="indicator-number"
+                      animate={{ scale: [1, 1.05, 1] }}
+                      transition={{ duration: 2, repeat: Infinity, delay: 0.3 }}
+                    >4.8⭐</motion.span>
                     <span className="indicator-label">App Rating</span>
-                  </div>
+                  </motion.div>
                   <div className="indicator-divider"></div>
-                  <div className="indicator">
-                    <span className="indicator-number">98%</span>
+                  <motion.div 
+                    className="indicator"
+                    whileHover={{ scale: 1.1 }}
+                  >
+                    <motion.span 
+                      className="indicator-number"
+                      animate={{ scale: [1, 1.05, 1] }}
+                      transition={{ duration: 2, repeat: Infinity, delay: 0.6 }}
+                    >98%</motion.span>
                     <span className="indicator-label">Partner Satisfaction</span>
-                  </div>
-                </div>
+                  </motion.div>
+                </motion.div>
               </motion.div>
             </div>
 
@@ -246,7 +258,7 @@ const PartnerHeroSection = () => {
                           <input
                             type="text"
                             name="salonName"
-                            placeholder="Salon, clinic, or beauty center name"
+                            placeholder="Beauty center, spa, or clinic name"
                             value={formData.salonName}
                             onChange={handleChange}
                             required
@@ -291,7 +303,7 @@ const PartnerHeroSection = () => {
                           <input
                             type="email"
                             name="email"
-                            placeholder="email@salon.com"
+                            placeholder="email@business.com"
                             value={formData.email}
                             onChange={handleChange}
                           />
@@ -343,7 +355,7 @@ const PartnerHeroSection = () => {
                         <input
                           type="text"
                           name="instaAccount"
-                          placeholder="@yoursalon"
+                          placeholder="@yourbusiness"
                           value={formData.instaAccount}
                           onChange={handleChange}
                         />
@@ -351,12 +363,14 @@ const PartnerHeroSection = () => {
 
                       <motion.button
                         type="submit"
-                        className="submit-btn-hero"
+                        className="btn-muchglow send-gift-btn-enhanced"
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
+                        style={{ marginTop: '1.5rem' }}
                       >
+                        <span className="gift-icon">🚀</span>
                         <span>Complete Registration</span>
-                        <span className="btn-icon">🚀</span>
+                        <span className="urgency-badge">Free Trial!</span>
                       </motion.button>
                     </form>
                   </motion.div>

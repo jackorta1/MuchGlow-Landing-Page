@@ -1,0 +1,551 @@
+/* ===========================
+   MuchGlow Button Design System
+   =========================== */
+
+/* Base Button Variables */
+:root {
+  /* Button Colors */
+  --btn-primary-bg: linear-gradient(135deg, #E75481 0%, #FF6B9D 100%);
+  --btn-primary-hover: linear-gradient(135deg, #FF6B9D 0%, #E75481 100%);
+  --btn-secondary-bg: linear-gradient(135deg, #FFFFFF 0%, #F8F8F8 100%);
+  --btn-secondary-hover: linear-gradient(135deg, #FFF5F7 0%, #FFE0E6 100%);
+  --btn-success-bg: linear-gradient(135deg, #4CAF50 0%, #66BB6A 100%);
+  --btn-gold-bg: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+  
+  /* Button Shadows */
+  --btn-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --btn-shadow-md: 0 8px 25px rgba(231, 84, 129, 0.25);
+  --btn-shadow-lg: 0 15px 40px rgba(231, 84, 129, 0.35);
+  --btn-shadow-xl: 0 20px 60px rgba(231, 84, 129, 0.4);
+  --btn-shadow-hover: 0 12px 35px rgba(231, 84, 129, 0.35), 0 0 0 4px rgba(231, 84, 129, 0.1);
+  
+  /* Button Sizes */
+  --btn-padding-sm: 10px 20px;
+  --btn-padding-md: 14px 32px;
+  --btn-padding-lg: 18px 45px;
+  --btn-padding-xl: 22px 55px;
+  
+  /* Button Typography */
+  --btn-font-sm: 0.875rem;
+  --btn-font-md: 1rem;
+  --btn-font-lg: 1.125rem;
+  --btn-font-xl: 1.25rem;
+  
+  /* Animations */
+  --btn-transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --btn-hover-transform: translateY(-3px) scale(1.02);
+  --btn-active-transform: translateY(0) scale(0.98);
+}
+
+/* ===========================
+   Base Button Styles
+   =========================== */
+
+.btn-muchglow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  position: relative;
+  overflow: hidden;
+  transition: var(--btn-transition);
+  isolation: isolate;
+  white-space: nowrap;
+  text-decoration: none;
+  font-family: var(--font-sans);
+}
+
+/* Ripple Effect */
+.btn-muchglow::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+  z-index: 0;
+}
+
+.btn-muchglow:active::before {
+  width: 300px;
+  height: 300px;
+}
+
+/* Shine Effect */
+.btn-muchglow::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  transform: rotate(45deg);
+  transition: all 0.5s;
+  opacity: 0;
+}
+
+.btn-muchglow:hover::after {
+  animation: shine 0.5s ease-in-out;
+}
+
+@keyframes shine {
+  0% {
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%) translateY(100%) rotate(45deg);
+    opacity: 0;
+  }
+}
+
+/* Button Content */
+.btn-muchglow > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ===========================
+   Enhanced Send Gift Button
+   =========================== */
+
+.send-gift-btn-enhanced {
+  width: 100%;
+  padding: var(--btn-padding-lg);
+  background: var(--btn-primary-bg);
+  color: white;
+  border-radius: 60px;
+  font-size: var(--btn-font-lg);
+  font-weight: 700;
+  box-shadow: var(--btn-shadow-md);
+  position: relative;
+  animation: pulse-glow 2s infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: var(--btn-shadow-md);
+  }
+  50% {
+    box-shadow: var(--btn-shadow-lg), 0 0 30px rgba(231, 84, 129, 0.4);
+  }
+}
+
+.send-gift-btn-enhanced:hover {
+  background: var(--btn-primary-hover);
+  transform: var(--btn-hover-transform);
+  box-shadow: var(--btn-shadow-hover);
+  animation: none;
+}
+
+.send-gift-btn-enhanced:active {
+  transform: var(--btn-active-transform);
+}
+
+/* Gift Icon Animation */
+.send-gift-btn-enhanced .gift-icon {
+  display: inline-block;
+  margin-right: 8px;
+  font-size: 1.25em;
+  animation: bounce-icon 1.5s infinite;
+}
+
+@keyframes bounce-icon {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-3px) rotate(-5deg);
+  }
+  75% {
+    transform: translateY(-3px) rotate(5deg);
+  }
+}
+
+/* Urgency Badge */
+.send-gift-btn-enhanced .urgency-badge {
+  position: absolute;
+  top: -10px;
+  right: 20px;
+  background: var(--btn-gold-bg);
+  color: #333;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  animation: wiggle 2s infinite;
+  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.5);
+}
+
+@keyframes wiggle {
+  0%, 100% {
+    transform: rotate(-3deg) scale(1);
+  }
+  50% {
+    transform: rotate(3deg) scale(1.05);
+  }
+}
+
+/* ===========================
+   Enhanced Partnership Buttons
+   =========================== */
+
+.btn-partnership-primary {
+  padding: var(--btn-padding-lg);
+  background: var(--btn-primary-bg);
+  color: white;
+  border-radius: 50px;
+  font-size: var(--btn-font-lg);
+  font-weight: 700;
+  box-shadow: var(--btn-shadow-md);
+  min-width: 220px;
+  position: relative;
+}
+
+.btn-partnership-primary:hover {
+  background: var(--btn-primary-hover);
+  transform: var(--btn-hover-transform);
+  box-shadow: var(--btn-shadow-xl);
+}
+
+/* Arrow Animation */
+.btn-partnership-primary .arrow-icon {
+  display: inline-block;
+  margin-left: 8px;
+  transition: transform 0.3s ease;
+}
+
+.btn-partnership-primary:hover .arrow-icon {
+  transform: translateX(5px);
+  animation: arrow-slide 0.6s ease-in-out;
+}
+
+@keyframes arrow-slide {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(8px);
+  }
+  100% {
+    transform: translateX(5px);
+  }
+}
+
+/* New Badge */
+.btn-partnership-primary .new-badge {
+  position: absolute;
+  top: -12px;
+  right: -12px;
+  background: linear-gradient(135deg, #FF6B9D 0%, #FFD700 100%);
+  color: white;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+  font-weight: 800;
+  animation: rotate-badge 3s linear infinite;
+  box-shadow: 0 4px 12px rgba(255, 107, 157, 0.5);
+}
+
+@keyframes rotate-badge {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(180deg) scale(1.1);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
+}
+
+.btn-partnership-secondary {
+  padding: var(--btn-padding-md);
+  background: var(--btn-secondary-bg);
+  color: var(--primary);
+  border: 2px solid var(--primary);
+  border-radius: 50px;
+  font-size: var(--btn-font-md);
+  font-weight: 600;
+  box-shadow: var(--btn-shadow-sm);
+  min-width: 180px;
+  position: relative;
+  backdrop-filter: blur(10px);
+}
+
+.btn-partnership-secondary:hover {
+  background: var(--btn-primary-bg);
+  color: white;
+  transform: var(--btn-hover-transform);
+  box-shadow: var(--btn-shadow-md);
+  border-color: transparent;
+}
+
+/* ===========================
+   Amount Selection Buttons
+   =========================== */
+
+.amount-btn-enhanced {
+  padding: 12px 24px;
+  background: white;
+  color: var(--primary);
+  border: 2px solid rgba(231, 84, 129, 0.2);
+  border-radius: 25px;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: var(--btn-transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.amount-btn-enhanced:hover {
+  background: var(--btn-secondary-hover);
+  border-color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(231, 84, 129, 0.2);
+}
+
+.amount-btn-enhanced.active {
+  background: var(--btn-primary-bg);
+  color: white;
+  border-color: transparent;
+  transform: scale(1.05);
+  box-shadow: var(--btn-shadow-md);
+}
+
+.amount-btn-enhanced.active::after {
+  content: '✓';
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: var(--btn-success-bg);
+  color: white;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+  font-weight: bold;
+  box-shadow: 0 2px 8px rgba(76, 175, 80, 0.4);
+}
+
+/* ===========================
+   Button Group Styles
+   =========================== */
+
+.btn-group-hero {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.btn-group-hero .btn-muchglow:first-child {
+  animation: subtle-pulse 3s infinite;
+}
+
+@keyframes subtle-pulse {
+  0%, 100% {
+    box-shadow: var(--btn-shadow-md);
+  }
+  50% {
+    box-shadow: var(--btn-shadow-lg);
+  }
+}
+
+/* ===========================
+   Loading State
+   =========================== */
+
+.btn-muchglow.loading {
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+.btn-muchglow.loading::before {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+/* ===========================
+   Success Animation
+   =========================== */
+
+.btn-muchglow.success {
+  background: var(--btn-success-bg) !important;
+  animation: success-bounce 0.6s ease;
+}
+
+@keyframes success-bounce {
+  0% {
+    transform: scale(1);
+  }
+  30% {
+    transform: scale(1.1);
+  }
+  60% {
+    transform: scale(0.95);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* ===========================
+   Mobile Optimizations
+   =========================== */
+
+@media (max-width: 768px) {
+  .btn-muchglow {
+    font-size: var(--btn-font-md);
+    padding: var(--btn-padding-md);
+  }
+  
+  .send-gift-btn-enhanced {
+    padding: 16px 32px;
+    font-size: 1.125rem;
+  }
+  
+  .btn-partnership-primary {
+    width: 100%;
+    padding: 16px 32px;
+  }
+  
+  .btn-partnership-secondary {
+    width: 100%;
+    padding: 14px 28px;
+  }
+  
+  .btn-group-hero {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .btn-group-hero .btn-muchglow {
+    width: 100%;
+  }
+  
+  /* Touch-friendly spacing */
+  .amount-btn-enhanced {
+    min-height: 48px;
+    margin: 4px;
+  }
+  
+  /* Larger tap targets */
+  .btn-muchglow {
+    min-height: 48px;
+    min-width: 48px;
+  }
+}
+
+@media (max-width: 480px) {
+  .send-gift-btn-enhanced {
+    padding: 14px 24px;
+    font-size: 1rem;
+  }
+  
+  .send-gift-btn-enhanced .urgency-badge {
+    position: static;
+    display: block;
+    margin-top: 8px;
+    border-radius: 15px;
+    animation: none;
+  }
+  
+  .amount-btn-enhanced {
+    padding: 10px 16px;
+    font-size: 0.875rem;
+  }
+}
+
+/* ===========================
+   Accessibility
+   =========================== */
+
+.btn-muchglow:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(231, 84, 129, 0.25);
+}
+
+.btn-muchglow:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .btn-muchglow,
+  .btn-muchglow::before,
+  .btn-muchglow::after {
+    animation: none !important;
+    transition: opacity 0.2s, background-color 0.2s !important;
+  }
+  
+  .send-gift-btn-enhanced,
+  .btn-partnership-primary .new-badge,
+  .send-gift-btn-enhanced .gift-icon,
+  .send-gift-btn-enhanced .urgency-badge {
+    animation: none !important;
+  }
+}
+
+/* ===========================
+   Dark Mode Support
+   =========================== */
+
+@media (prefers-color-scheme: dark) {
+  .btn-partnership-secondary {
+    background: linear-gradient(135deg, #2C2C2C 0%, #1A1A1A 100%);
+    color: white;
+    border-color: rgba(231, 84, 129, 0.5);
+  }
+  
+  .amount-btn-enhanced {
+    background: #2C2C2C;
+    color: white;
+    border-color: rgba(231, 84, 129, 0.3);
+  }
+  
+  .amount-btn-enhanced:hover {
+    background: linear-gradient(135deg, #3C3C3C 0%, #2C2C2C 100%);
+  }
+}
