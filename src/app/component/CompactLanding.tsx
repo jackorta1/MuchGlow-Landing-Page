@@ -544,20 +544,20 @@ const CompactLanding: React.FC<CompactLandingProps> = ({ lang = 'en' }) => {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <div className="mg-hero-card mg-animate-float">
-                <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
-                  <div style={{ fontSize: '3rem', marginBottom: '0.5rem' }}>💎</div>
-                  <h3 style={{ marginBottom: '0.5rem' }}>Zero Commission</h3>
-                  <p style={{ color: '#666', fontSize: '0.9rem' }}>First 3 months free</p>
-                </div>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                  {['Free Digital Marketing', 'Instant Client Access', 'Advanced Analytics', '24/7 Support'].map((item, i) => (
-                    <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                      <CheckCircle size={18} color="#0891B2" />
-                      <span style={{ fontSize: '0.9rem' }}>{item}</span>
-                    </div>
-                  ))}
-                </div>
+              <div className="mg-app-screenshot mg-animate-float">
+                <Image
+                  src="/appfeat.webp"
+                  alt="MuchGlow App - Book beauty and health services"
+                  width={380}
+                  height={760}
+                  style={{
+                    borderRadius: '32px',
+                    boxShadow: '0 25px 80px rgba(0, 0, 0, 0.25)',
+                    maxWidth: '100%',
+                    height: 'auto'
+                  }}
+                  priority
+                />
               </div>
             </motion.div>
           </div>
