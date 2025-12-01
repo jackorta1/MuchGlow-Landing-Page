@@ -2,12 +2,12 @@ import CompactLanding from "../component/CompactLanding";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "MuchGlow | Premium Beauty & Wellness Booking Platform",
-  description: "Your beauty, perfectly scheduled. Book premium treatments at the finest beauty centers, clinics, and spas. Pay with Tabby & Tamara.",
-  keywords: "beauty center booking, spa appointments, aesthetic clinics, wellness centers, luxury treatments, Tabby payments, Tamara installments",
+  title: "MuchGlow | Your Smart Platform for Beauty and Health Services",
+  description: "Book appointments, send digital gifts, discover clinics and salons, and enjoy modern, secure payments with Stripe, Tamara & Tabby. AI-powered beauty recommendations.",
+  keywords: "beauty booking app, salon appointments, aesthetic clinics, fitness centers, digital gift cards, AI face analysis, Stripe payments, Tamara installments, Tabby payments, GCC beauty platform, health and wellness booking",
   openGraph: {
-    title: "MuchGlow - Your Beauty, Perfectly Scheduled",
-    description: "Premium beauty and wellness booking platform",
+    title: "MuchGlow — Your Smart Platform for Beauty and Health Services",
+    description: "Book appointments, send digital gifts, discover clinics and salons, and enjoy modern, secure payments.",
     images: ["/muchglow.png"],
   },
 };

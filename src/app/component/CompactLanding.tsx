@@ -74,55 +74,56 @@ const CompactLanding: React.FC<CompactLandingProps> = ({ lang = 'en' }) => {
         contact: 'Contact'
       },
       hero: {
-        badge: 'Premium Wellness & Lifestyle Platform',
-        title: 'Your Wellness & Lifestyle,',
-        titleHighlight: 'Perfectly Scheduled',
-        subtitle: 'Book premium treatments at top salons, clinics, spas, gyms & fitness centers. Pay flexibly with Tabby & Tamara.',
-        ctaPrimary: 'Get Started',
+        badge: 'Your Smart Platform for Beauty and Health',
+        title: 'MuchGlow —',
+        titleHighlight: 'Beauty & Health Services',
+        subtitle: 'Book appointments, send digital gifts, discover clinics and salons, and enjoy modern, secure payments.',
+        ctaPrimary: 'Download App',
         ctaSecondary: 'Be a Partner',
         paymentLabel: 'Supported Payments:'
       },
       services: {
-        label: 'Our Services',
+        label: 'Key Features',
         title: 'What We Offer',
-        subtitle: 'Everything you need for your wellness & lifestyle business',
+        subtitle: 'Multi-category platform: Beauty, Health, Fitness',
         items: [
-          { icon: '🎁', title: 'Gift Cards System', desc: 'Digital gift cards with instant delivery' },
-          { icon: '💇', title: 'Salon & Spa', desc: 'Book appointments at premium salons & spas' },
-          { icon: '🏥', title: 'Clinics & Wellness', desc: 'Medical aesthetics & wellness centers' },
-          { icon: '💪', title: 'Gym & Fitness', desc: 'Personal training & fitness memberships' },
-          { icon: '🏢', title: 'Corporate Wellness', desc: 'Bulk gifting solutions for businesses' }
+          { icon: '🎁', title: 'Digital Gift Cards', desc: 'Send instant gifts to loved ones' },
+          { icon: '💇', title: 'Salon & Beauty Services', desc: 'Book at premium beauty salons' },
+          { icon: '🏥', title: 'Medical & Wellness Clinics', desc: 'Trusted medical & aesthetic services' },
+          { icon: '💪', title: 'Fitness & Sports Centers', desc: 'Gym memberships & personal training' },
+          { icon: '🔍', title: 'Smart Product Image Search', desc: 'AI-powered visual search technology' },
+          { icon: '🤖', title: 'AI Face Analysis', desc: 'Personalized beauty recommendations' }
         ]
       },
       whyUs: {
         label: 'Why MuchGlow',
         title: 'Why Choose Us',
         items: [
-          { icon: <Clock size={28} />, title: 'Fast & Easy', desc: 'Book in seconds, anytime' },
-          { icon: <Shield size={28} />, title: 'Secure', desc: 'Verified & trusted partners' },
-          { icon: <Star size={28} />, title: 'Quality', desc: 'Premium services only' },
-          { icon: <CreditCard size={28} />, title: 'Flexible Pay', desc: 'Split payments available' }
+          { icon: <Clock size={28} />, title: 'Fast and Easy Booking', desc: 'Book in seconds, anytime' },
+          { icon: <Shield size={28} />, title: 'Secure Online Payments', desc: 'Safe & protected transactions' },
+          { icon: <Star size={28} />, title: 'Trusted Clinics & Salons', desc: 'Verified & quality partners' },
+          { icon: <Sparkles size={28} />, title: 'Smart AI Features', desc: 'Powered by artificial intelligence' }
         ]
       },
       howItWorks: {
         label: 'Simple Process',
         title: 'How It Works',
         steps: [
-          { num: '1', title: 'Discover', desc: 'Browse salons, clinics, gyms & spas' },
-          { num: '2', title: 'Book', desc: 'Choose your time & pay' },
-          { num: '3', title: 'Transform', desc: 'Enjoy your experience' }
+          { num: '1', title: 'Discover Services', desc: 'Browse salons, clinics & fitness centers' },
+          { num: '2', title: 'Select Your Appointment', desc: 'Choose your preferred time & service' },
+          { num: '3', title: 'Enjoy Your Experience', desc: 'Arrive and enjoy premium service' }
         ]
       },
       payment: {
-        title: 'Pay Your Way',
+        title: 'Flexible Payments',
         subtitle: 'Split payments with zero interest using our supported payment partners.',
-        tabby: 'Split in 4 payments',
-        tamara: 'Pay in 3 installments',
-        stripe: 'Secure card payments'
+        tabby: 'Tabby (Coming Soon)',
+        tamara: 'Tamara (Live)',
+        stripe: 'Stripe (Live)'
       },
       gift: {
         title: "Make Someone's Day",
-        subtitle: 'Send a Wellness Gift Instantly',
+        subtitle: 'Send a Digital Gift Instantly',
         description: 'Send salon, clinic, spa, gym, or fitness experiences to your loved ones in just a few taps.',
         steps: [
           { num: '1', icon: '🏰', title: 'Pick a Destination', desc: 'Choose from premium salons, clinics, gyms, spas & fitness centers' },
@@ -137,9 +138,9 @@ const CompactLanding: React.FC<CompactLandingProps> = ({ lang = 'en' }) => {
         cardThemes: ['Ocean Teal', 'Champagne', 'Royal Gold', 'Deep Navy']
       },
       partner: {
-        label: 'Join Us',
+        label: 'Grow Your Business',
         title: 'Become a Partner',
-        subtitle: 'Grow your salon, clinic, gym, or wellness business with MuchGlow',
+        subtitle: 'Join clinics, salons, and fitness providers who use our platform to reach more customers',
         benefits: [
           'Access 50,000+ active users',
           'Zero commission first 3 months',
@@ -147,18 +148,18 @@ const CompactLanding: React.FC<CompactLandingProps> = ({ lang = 'en' }) => {
           'Advanced booking management',
           '24/7 dedicated support'
         ],
-        formTitle: 'Quick Registration',
+        formTitle: 'Partner Registration',
         fields: {
           companyName: 'Business Name',
-          contactPerson: 'Contact Person',
-          email: 'Email Address',
-          phone: 'Phone Number',
+          contactPerson: 'Contact Name',
+          email: 'Email',
+          phone: 'Phone',
           country: 'Country',
-          businessType: 'Type of Business',
+          businessType: 'Business Type',
           message: 'Message (Optional)'
         },
         countries: ['UAE', 'Saudi Arabia', 'Kuwait', 'Qatar', 'Bahrain', 'Oman'],
-        businessTypes: ['Salon', 'Spa', 'Aesthetic Clinic', 'Medical Clinic', 'Wellness Center', 'Gym', 'Fitness Center', 'Personal Training', 'Other'],
+        businessTypes: ['Salon', 'Spa', 'Aesthetic Clinic', 'Medical Clinic', 'Health & Beauty Center', 'Gym', 'Fitness Center', 'Personal Training', 'Other'],
         submit: 'Submit Application',
         submitting: 'Submitting...',
         success: 'Application submitted! We\'ll contact you within 24 hours.'
@@ -170,11 +171,11 @@ const CompactLanding: React.FC<CompactLandingProps> = ({ lang = 'en' }) => {
           { name: 'Sara Al-Rashid', role: 'Regular Customer', rating: 5, text: 'MuchGlow made booking my clinic and spa appointments so easy! The gift card feature is perfect for surprising friends.' },
           { name: 'Ahmed Hassan', role: 'Gym Owner', rating: 5, text: 'As a gym partner, MuchGlow has increased our memberships by 40%. The platform is professional and easy to use.' },
           { name: 'Khalid Omar', role: 'Fitness Enthusiast', rating: 5, text: 'Love the flexible payment options! I can book gym sessions and spa treatments all in one place.' },
-          { name: 'Layla Mohammed', role: 'Corporate Client', rating: 5, text: 'We use MuchGlow for all our employee wellness gifts - gyms, spas, and clinics. The bulk ordering is fantastic!' }
+          { name: 'Layla Mohammed', role: 'Corporate Client', rating: 5, text: 'We use MuchGlow for all our employee health and beauty gifts - gyms, spas, and clinics. The bulk ordering is fantastic!' }
         ]
       },
       footer: {
-        desc: 'MuchGlow simplifies booking at salons, clinics, gyms, spas & fitness centers. In-person or virtual consultations.',
+        desc: 'MuchGlow is a modern platform for beauty, health, and wellness services. We connect users with trusted clinics, salons, and fitness centers across GCC countries.',
         headOffice: 'Head Office',
         address: 'Al Ain, UAE',
         getApp: 'Get the App',
@@ -194,58 +195,59 @@ const CompactLanding: React.FC<CompactLandingProps> = ({ lang = 'en' }) => {
         contact: 'اتصل بنا'
       },
       hero: {
-        badge: 'منصة العافية ونمط الحياة المتميزة',
-        title: 'عافيتك ونمط حياتك،',
-        titleHighlight: 'مجدول بإتقان',
-        subtitle: 'احجز علاجات متميزة في أفضل الصالونات والعيادات والمنتجعات والنوادي الرياضية ومراكز اللياقة. ادفع بمرونة مع تابي وتمارا.',
-        ctaPrimary: 'ابدأ الآن',
+        badge: 'منصّة متكاملة لخدمات الصحة والجمال',
+        title: 'MuchGlow —',
+        titleHighlight: 'منصّتك الذكية للصحة والجمال',
+        subtitle: 'احجز مواعيدك، أرسل الهدايا الرقمية، اكتشف أفضل العيادات والصالونات، وتمتّع بخيارات دفع حديثة وآمنة.',
+        ctaPrimary: 'حمّل التطبيق',
         ctaSecondary: 'كن شريكاً',
         paymentLabel: 'طرق الدفع المدعومة:'
       },
       services: {
-        label: 'خدماتنا',
+        label: 'خدماتنا الرئيسية',
         title: 'ما نقدمه',
-        subtitle: 'كل ما تحتاجه لأعمال العافية ونمط الحياة الخاصة بك',
+        subtitle: 'منصّة متعددة الخدمات: الصحة، الجمال، واللياقة',
         items: [
-          { icon: '🎁', title: 'نظام بطاقات الهدايا', desc: 'بطاقات هدايا رقمية بتوصيل فوري' },
-          { icon: '💇', title: 'الصالونات والسبا', desc: 'احجز مواعيد في صالونات ومنتجعات متميزة' },
-          { icon: '🏥', title: 'العيادات والعافية', desc: 'التجميل الطبي ومراكز العافية' },
-          { icon: '💪', title: 'النوادي واللياقة', desc: 'تدريب شخصي واشتراكات لياقة' },
-          { icon: '🏢', title: 'عافية الشركات', desc: 'حلول إهداء جماعية للشركات' }
+          { icon: '🎁', title: 'بطاقات هدايا رقمية', desc: 'أرسل هدايا فورية لأحبائك' },
+          { icon: '💇', title: 'خدمات الصالونات والتجميل', desc: 'احجز في أفضل صالونات التجميل' },
+          { icon: '🏥', title: 'العيادات الطبية والتجميلية', desc: 'خدمات طبية وتجميلية موثوقة' },
+          { icon: '💪', title: 'النوادي والمراكز الرياضية', desc: 'اشتراكات لياقة وتدريب شخصي' },
+          { icon: '🔍', title: 'البحث عن المنتجات عبر الصورة', desc: 'تقنية ذكية للبحث البصري' },
+          { icon: '🤖', title: 'تحليل الوجه بالذكاء الاصطناعي', desc: 'توصيات جمالية مخصصة لك' }
         ]
       },
       whyUs: {
-        label: 'لماذا ماتش جلو',
+        label: 'لماذا MuchGlow',
         title: 'لماذا تختارنا',
         items: [
-          { icon: <Clock size={28} />, title: 'سريع وسهل', desc: 'احجز في ثوانٍ، في أي وقت' },
-          { icon: <Shield size={28} />, title: 'آمن', desc: 'شركاء موثوقون ومعتمدون' },
-          { icon: <Star size={28} />, title: 'جودة', desc: 'خدمات متميزة فقط' },
-          { icon: <CreditCard size={28} />, title: 'دفع مرن', desc: 'تقسيط متاح' }
+          { icon: <Clock size={28} />, title: 'حجز سريع وسهل', desc: 'احجز في ثوانٍ، في أي وقت' },
+          { icon: <Shield size={28} />, title: 'مدفوعات آمنة', desc: 'دفع آمن عبر الإنترنت' },
+          { icon: <Star size={28} />, title: 'عيادات وصالونات موثوقة', desc: 'شركاء معتمدون ومختارون' },
+          { icon: <Sparkles size={28} />, title: 'مزايا ذكية بالذكاء الاصطناعي', desc: 'تقنيات متطورة لخدمتك' }
         ]
       },
       howItWorks: {
-        label: 'عملية بسيطة',
-        title: 'كيف يعمل',
+        label: 'كيف يعمل',
+        title: 'ثلاث خطوات بسيطة',
         steps: [
-          { num: '1', title: 'اكتشف', desc: 'تصفح الصالونات والعيادات والنوادي والمنتجعات' },
-          { num: '2', title: 'احجز', desc: 'اختر وقتك وادفع' },
-          { num: '3', title: 'تحوّل', desc: 'استمتع بتجربتك' }
+          { num: '1', title: 'اكتشف الخدمات', desc: 'تصفح الصالونات والعيادات والنوادي' },
+          { num: '2', title: 'اختر الموعد المناسب', desc: 'حدد الوقت والخدمة المطلوبة' },
+          { num: '3', title: 'استمتع بتجربتك', desc: 'احضر واستمتع بخدمة مميزة' }
         ]
       },
       payment: {
-        title: 'ادفع بطريقتك',
+        title: 'خيارات دفع مرنة',
         subtitle: 'قسّط مدفوعاتك بدون فوائد مع شركاء الدفع المدعومين.',
-        tabby: 'قسّط على 4 دفعات',
-        tamara: 'ادفع على 3 أقساط',
-        stripe: 'دفعات بطاقة آمنة'
+        tabby: 'Tabby (قريبًا)',
+        tamara: 'Tamara (متاح)',
+        stripe: 'Stripe (متاح)'
       },
       gift: {
         title: 'اصنع يوماً مميزاً',
-        subtitle: 'أرسل هدية عافية فورية',
-        description: 'أرسل تجارب الصالون والعيادة والسبا والنادي الرياضي ومراكز اللياقة لأحبائك ببضع نقرات.',
+        subtitle: 'أرسل هدية رقمية فورية',
+        description: 'أرسل تجارب الصالون والعيادة والسبا والنادي الرياضي لأحبائك ببضع نقرات.',
         steps: [
-          { num: '1', icon: '🏰', title: 'اختر الوجهة', desc: 'اختر من الصالونات والعيادات والنوادي والمنتجعات ومراكز اللياقة' },
+          { num: '1', icon: '🏰', title: 'اختر الوجهة', desc: 'اختر من الصالونات والعيادات والنوادي والمنتجعات' },
           { num: '2', icon: '🎨', title: 'خصص هديتك', desc: 'اختر المبلغ وتصميم البطاقة الجميل' },
           { num: '3', icon: '💝', title: 'أرسل بحب', desc: 'اسعد أصدقاءك وأحبائك فوراً' }
         ],
@@ -257,9 +259,9 @@ const CompactLanding: React.FC<CompactLandingProps> = ({ lang = 'en' }) => {
         cardThemes: ['أزرق محيطي', 'شامبانيا', 'ذهبي ملكي', 'كحلي غامق']
       },
       partner: {
-        label: 'انضم إلينا',
-        title: 'كن شريكاً',
-        subtitle: 'طوّر أعمال الصالون أو العيادة أو النادي الرياضي أو مركز العافية مع ماتش جلو',
+        label: 'نمِّ أعمالك',
+        title: 'كن شريكاً مع MuchGlow',
+        subtitle: 'انضم إلى العيادات والصالونات ومراكز اللياقة التي تستخدم منصّتنا للوصول إلى المزيد من العملاء',
         benefits: [
           'الوصول إلى أكثر من 50,000 مستخدم نشط',
           'صفر عمولة لأول 3 أشهر',
@@ -267,18 +269,18 @@ const CompactLanding: React.FC<CompactLandingProps> = ({ lang = 'en' }) => {
           'إدارة حجوزات متقدمة',
           'دعم مخصص 24/7'
         ],
-        formTitle: 'تسجيل سريع',
+        formTitle: 'نموذج الشراكة',
         fields: {
-          companyName: 'اسم النشاط التجاري',
-          contactPerson: 'الشخص المسؤول',
+          companyName: 'اسم المنشأة',
+          contactPerson: 'اسم الشخص المسؤول',
           email: 'البريد الإلكتروني',
           phone: 'رقم الهاتف',
           country: 'الدولة',
-          businessType: 'نوع العمل',
-          message: 'رسالة (اختياري)'
+          businessType: 'نوع النشاط',
+          message: 'الرسالة (اختياري)'
         },
         countries: ['الإمارات', 'السعودية', 'الكويت', 'قطر', 'البحرين', 'عُمان'],
-        businessTypes: ['صالون', 'سبا', 'عيادة تجميل', 'عيادة طبية', 'مركز عافية', 'نادي رياضي', 'مركز لياقة', 'تدريب شخصي', 'أخرى'],
+        businessTypes: ['صالون', 'سبا', 'عيادة تجميل', 'عيادة طبية', 'مركز صحة وجمال', 'نادي رياضي', 'مركز لياقة', 'تدريب شخصي', 'أخرى'],
         submit: 'إرسال الطلب',
         submitting: 'جاري الإرسال...',
         success: 'تم إرسال الطلب! سنتواصل معك خلال 24 ساعة.'
@@ -287,19 +289,19 @@ const CompactLanding: React.FC<CompactLandingProps> = ({ lang = 'en' }) => {
         label: 'آراء العملاء',
         title: 'ماذا يقول عملاؤنا',
         items: [
-          { name: 'سارة الراشد', role: 'عميلة منتظمة', rating: 5, text: 'ماتش جلو جعل حجز مواعيد العيادات والسبا سهلاً جداً! ميزة بطاقات الهدايا مثالية لمفاجأة الأصدقاء.' },
-          { name: 'أحمد حسن', role: 'صاحب نادي رياضي', rating: 5, text: 'كشريك نادي رياضي، زاد ماتش جلو اشتراكاتنا بنسبة 40%. المنصة احترافية وسهلة الاستخدام.' },
+          { name: 'سارة الراشد', role: 'عميلة منتظمة', rating: 5, text: 'MuchGlow جعل حجز مواعيد العيادات والسبا سهلاً جداً! ميزة بطاقات الهدايا مثالية لمفاجأة الأصدقاء.' },
+          { name: 'أحمد حسن', role: 'صاحب نادي رياضي', rating: 5, text: 'كشريك نادي رياضي، زاد MuchGlow اشتراكاتنا بنسبة 40%. المنصة احترافية وسهلة الاستخدام.' },
           { name: 'خالد عمر', role: 'عاشق اللياقة', rating: 5, text: 'أحب خيارات الدفع المرنة! أستطيع حجز تمارين النادي والسبا في مكان واحد.' },
-          { name: 'ليلى محمد', role: 'عميلة شركات', rating: 5, text: 'نستخدم ماتش جلو لجميع هدايا العافية للموظفين - النوادي والمنتجعات والعيادات. نظام الطلب بالجملة رائع!' }
+          { name: 'ليلى محمد', role: 'عميلة شركات', rating: 5, text: 'نستخدم MuchGlow لجميع هدايا الصحة والجمال للموظفين - النوادي والمنتجعات والعيادات. نظام الطلب بالجملة رائع!' }
         ]
       },
       footer: {
-        desc: 'ماتش جلو يسهّل الحجز في الصالونات والعيادات والنوادي والمنتجعات ومراكز اللياقة. حضورياً أو افتراضياً.',
+        desc: 'MuchGlow هي منصّة حديثة لخدمات الصحة والجمال. نربط المستخدمين بأفضل العيادات والصالونات ومراكز اللياقة في دول الخليج.',
         headOffice: 'المكتب الرئيسي',
         address: 'العين، الإمارات',
         getApp: 'حمّل التطبيق',
-        appStore: 'آب ستور',
-        googlePlay: 'جوجل بلاي',
+        appStore: 'App Store',
+        googlePlay: 'Google Play',
         helpCenter: 'مركز المساعدة',
         terms: 'الشروط والأحكام',
         privacy: 'سياسة الخصوصية',

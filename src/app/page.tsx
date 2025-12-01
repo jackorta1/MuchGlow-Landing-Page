@@ -2,20 +2,20 @@ import CompactLanding from "./component/CompactLanding";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "MuchGlow | Premium Wellness & Lifestyle Booking Platform",
-  description: "Your wellness, perfectly scheduled. Book premium treatments at the finest salons, clinics, gyms, spas & fitness centers. Pay flexibly with Tabby & Tamara.",
-  keywords: "wellness booking, gym memberships, spa appointments, aesthetic clinics, fitness centers, personal training, salon booking UAE, wellness platform GCC, Tabby payments, Tamara installments",
+  title: "MuchGlow | Your Smart Platform for Beauty and Health Services",
+  description: "Book appointments, send digital gifts, discover clinics and salons, and enjoy modern, secure payments. AI Face Analysis, Smart Product Search, Flexible Payments with Stripe, Tamara & Tabby.",
+  keywords: "beauty booking app, salon appointments, aesthetic clinics, fitness centers, digital gift cards, AI face analysis, smart product search, Stripe payments, Tamara installments, Tabby payments, GCC beauty platform, health and wellness booking, gym memberships, personal training, spa booking UAE",
   openGraph: {
-    title: "MuchGlow - Your Wellness, Perfectly Scheduled",
-    description: "Premium wellness and lifestyle booking platform - salons, gyms, spas & clinics with flexible payments",
+    title: "MuchGlow — Your Smart Platform for Beauty and Health Services",
+    description: "Book appointments, send digital gifts, discover clinics and salons. AI-powered beauty platform with secure payments.",
     images: ["/muchglow.png"],
     type: "website",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "MuchGlow - Premium Wellness Booking",
-    description: "Book premium treatments at top salons, gyms, clinics & spas",
+    title: "MuchGlow — Beauty and Health Services Platform",
+    description: "Book appointments, send digital gifts, discover clinics and salons with AI-powered recommendations",
     images: ["/muchglow.png"],
   },
   robots: {
