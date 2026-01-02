@@ -14,12 +14,18 @@ npm run lint         # Run ESLint
 
 ## Technology Stack
 
-- **Next.js 15** with App Router and TypeScript
+- **Next.js 15.0.7** with App Router and TypeScript (security patched)
 - **React Bootstrap** + Bootstrap 5.3 for UI components
 - **Framer Motion** for animations
 - **FontAwesome** + **Lucide React** for icons
 - **Embla Carousel** for sliders
 - Path alias: `@/*` maps to `./src/*`
+
+## Production
+
+- **URL**: https://muchglow.com
+- **Server**: nginx/1.24.0 on Ubuntu
+- **Deployment**: External IT company handles deployment
 
 ## Architecture
 
@@ -72,3 +78,22 @@ The project uses relaxed ESLint rules (warnings not errors) for:
 - Delete `.next/` folder to force a clean rebuild if changes don't appear
 - Test both `/en` and `/ar` routes when making changes
 - Node.js 18+ required (20+ recommended)
+
+## Security Notes
+
+- **Keep Next.js updated**: Check for security patches regularly
+- CVE-2025-66478 (React2Shell) was patched by upgrading to Next.js 15.0.7
+- Run `npm audit` periodically to check for vulnerabilities
+- After security updates, always run `npm run build` to verify no breaking changes
+
+## Deployment Checklist
+
+When sending updates to the deployment team:
+1. Run `npm run build` locally to verify production build works
+2. Include `package.json` and `package-lock.json` if dependencies changed
+3. Deployment commands on server:
+   ```bash
+   npm install
+   npm run build
+   # Restart the application (pm2 restart or systemctl restart)
+   ```
