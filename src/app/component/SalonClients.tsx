@@ -1,3 +1,5 @@
+"use client";
+
 import React from 'react'
 import HaddingSection from './HaddingSection'
 import ClientSlide from './ClientSlide'

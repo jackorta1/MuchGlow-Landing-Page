@@ -1,19 +1,16 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import Image from 'next/image';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  Menu, X, Globe,
-  Sparkles, Gift, Shield, CreditCard, Clock, Star,
-  Search, Calendar, CheckCircle,
-  Instagram, Linkedin, Mail, Phone, MapPin,
-  ChevronUp, Send, ArrowRight, MessageCircle, Quote
+  Menu, X,
+  Gift, Scissors, Plus, Activity, Search, ScanFace,
+  CheckCircle, ChevronUp, Send, Star, Quote
 } from 'lucide-react';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import MuchGlowLogo from '../../../public/muchglow.png';
 
 interface CompactLandingProps {
   lang?: 'en' | 'ar';
@@ -37,14 +34,38 @@ const CompactLanding: React.FC<CompactLandingProps> = ({ lang = 'en' }) => {
     message: ''
   });
 
+  // Scroll reveal observer
+  const observerRef = useRef<IntersectionObserver | null>(null);
+
+  useEffect(() => {
+    observerRef.current = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in');
+            observerRef.current?.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.14 }
+    );
+
+    const revealEls = document.querySelectorAll('.lux-reveal');
+    revealEls.forEach((el, i) => {
+      (el as HTMLElement).style.transitionDelay = `${(i % 3) * 0.08}s`;
+      observerRef.current?.observe(el);
+    });
+
+    return () => observerRef.current?.disconnect();
+  }, []);
+
   // Scroll effects
   useEffect(() => {
     const handleScroll = () => {
       setShowScrollTop(window.scrollY > 400);
       setIsScrolled(window.scrollY > 50);
 
-      // Detect active section for nav highlight
-      const sections = ['services', 'gift', 'how-it-works', 'partner'];
+      const sections = ['features', 'gift', 'how-it-works', 'partner'];
       for (const section of sections) {
         const element = document.getElementById(section);
         if (element) {
@@ -60,93 +81,131 @@ const CompactLanding: React.FC<CompactLandingProps> = ({ lang = 'en' }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToTop = () => {
+  const scrollToTop = useCallback(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+  }, []);
 
   // Content translations
   const content = {
     en: {
+      announce: {
+        tag: 'APP EXCLUSIVE',
+        text: 'Get the best prices on the app — always lower than walk-in.',
+        cta: 'Download now'
+      },
       nav: {
         services: 'Services',
+        giftCards: 'Gift Cards',
         howItWorks: 'How It Works',
-        partners: 'Partners',
-        contact: 'Contact'
+        partners: 'Partners'
       },
       hero: {
-        badge: 'Your Smart Platform for Beauty and Health',
-        title: 'MuchGlow —',
-        titleHighlight: 'Beauty & Health Services',
-        subtitle: 'Book appointments, send digital gifts, discover clinics and salons, and enjoy modern, secure payments.',
+        eyebrow: 'Your Smart Platform for Beauty & Health',
+        titleLine1: 'Beauty & wellness,',
+        titleLine2: 'beautifully booked.',
+        lead: 'Book salons, clinics, spas & gyms across the UAE at prices lower than walk-in. Send digital gifts, scan your skin with AI, and pay your way — all in one refined app.',
         ctaPrimary: 'Download App',
-        ctaSecondary: 'Be a Partner',
-        paymentLabel: 'Supported Payments:'
+        ctaSecondary: 'Become a Partner',
+        paymentLabel: 'Supported payments'
       },
-      services: {
-        label: 'Key Features',
-        title: 'What We Offer',
-        subtitle: 'Multi-category platform: Beauty, Health, Fitness',
+      appBanner: {
+        eyebrow: 'Why Book on the App?',
+        titleLine1: 'Better prices than',
+        titleLine2: 'walking in.',
+        desc: 'MuchGlow partners offer exclusive in-app pricing you won\'t find at the counter. Book ahead, skip the queue, and pay less — every single time.',
+        perks: [
+          { icon: '💰', text: 'App-exclusive prices' },
+          { icon: '🎁', text: 'Bonus points on top-up' },
+          { icon: '📱', text: 'Skip the queue' },
+          { icon: '💳', text: '0% interest BNPL' }
+        ],
+        priceBadge: 'Save up to 30%',
+        ctaPrimary: 'Get the App',
+        ctaSecondary: 'Browse Services'
+      },
+      features: {
+        eyebrow: 'Key Features',
+        title: 'One ecosystem for self-care',
+        subtitle: 'Beauty, wellness, fitness and healthcare — a single connected marketplace built for the Gulf.',
         items: [
-          { icon: '🎁', title: 'Digital Gift Cards', desc: 'Send instant gifts to loved ones' },
-          { icon: '💇', title: 'Salon & Beauty Services', desc: 'Book at premium beauty salons' },
-          { icon: '🏥', title: 'Medical & Wellness Clinics', desc: 'Trusted medical & aesthetic services' },
-          { icon: '💪', title: 'Fitness & Sports Centers', desc: 'Gym memberships & personal training' },
-          { icon: '🔍', title: 'Smart Product Image Search', desc: 'AI-powered visual search technology' },
-          { icon: '🤖', title: 'AI Face Analysis', desc: 'Personalized beauty recommendations' }
+          { num: '01', title: 'Digital Gift Cards', desc: 'Send instant beauty & wellness gifts — credit or a specific salon experience — to anyone.' },
+          { num: '02', title: 'Salons & Barbershops', desc: 'Book premium hair, beauty and grooming appointments with verified providers near you.' },
+          { num: '03', title: 'Medical & Wellness Clinics', desc: 'Trusted dermatology, aesthetic and recovery services, fully bookable in-app.' },
+          { num: '04', title: 'Gyms & Fitness', desc: 'Memberships, personal trainers and fitness centres — discover and join in seconds.' },
+          { num: '05', title: 'Smart Discovery', desc: 'Search by category, location, rating and offers — map-based, radius-aware, instant.' },
+          { num: '06', title: 'AI Face Analysis', desc: 'Scan your skin and get personalised treatment recommendations in seconds.' }
+        ]
+      },
+      ai: {
+        eyebrow: 'Powered by AI',
+        titleLine1: 'Scan your skin.',
+        titleLine2: 'Glow smarter.',
+        desc: "Upload or scan a facial image and MuchGlow's AI analyses visible skin conditions to recommend the right treatments — facials, hydration, acne care, rejuvenation and clinic consultations.",
+        tags: ['Facial treatments', 'Hydration', 'Acne care', 'Skin rejuvenation', 'Dermatology'],
+        badge: 'Face detected'
+      },
+      gift: {
+        eyebrow: "Make Someone's Day",
+        title: 'Send a digital gift,',
+        titleHighlight: 'instantly',
+        subtitle: 'Pick an amount or gift a specific salon experience. Choose a beautiful theme and deliver joy in a few taps.',
+        cta: 'Send a Gift Now',
+        steps: [
+          { num: '1', icon: '🏰', title: 'Pick a Destination', desc: 'Choose from premium salons, clinics, gyms, spas & fitness centers' },
+          { num: '2', icon: '🎨', title: 'Customize Your Gift', desc: 'Select amount and pick a beautiful card theme' },
+          { num: '3', icon: '💝', title: 'Send with Love', desc: 'Instantly deliver joy to friends and loved ones' }
         ]
       },
       whyUs: {
-        label: 'Why MuchGlow',
-        title: 'Why Choose Us',
+        eyebrow: 'Why MuchGlow',
+        title: 'Refined by design',
         items: [
-          { icon: <Clock size={28} />, title: 'Fast and Easy Booking', desc: 'Book in seconds, anytime' },
-          { icon: <Shield size={28} />, title: 'Secure Online Payments', desc: 'Safe & protected transactions' },
-          { icon: <Star size={28} />, title: 'Trusted Clinics & Salons', desc: 'Verified & quality partners' },
-          { icon: <Sparkles size={28} />, title: 'Smart AI Features', desc: 'Powered by artificial intelligence' }
+          { label: 'BOOKING', title: 'Fast & easy', desc: 'Book in seconds, anytime, from any device.' },
+          { label: 'PAYMENTS', title: 'Secure by default', desc: 'Stripe Connect, Apple Pay and BNPL — safe & protected.' },
+          { label: 'TRUST', title: 'Verified partners', desc: 'Quality clinics and salons, vetted and reviewed.' },
+          { label: 'INTELLIGENCE', title: 'Smart AI features', desc: 'Recommendations powered by real analysis.' }
         ]
       },
       howItWorks: {
-        label: 'Simple Process',
-        title: 'How It Works',
+        eyebrow: 'Simple Process',
+        title: 'How it works',
         steps: [
-          { num: '1', title: 'Discover Services', desc: 'Browse salons, clinics & fitness centers' },
-          { num: '2', title: 'Select Your Appointment', desc: 'Choose your preferred time & service' },
-          { num: '3', title: 'Enjoy Your Experience', desc: 'Arrive and enjoy premium service' }
+          { num: '1', title: 'Discover services', desc: 'Browse salons, clinics & fitness centres near you.' },
+          { num: '2', title: 'Select your time', desc: 'Choose a preferred slot and service that fits.' },
+          { num: '3', title: 'Enjoy & glow', desc: 'Arrive, relax and enjoy a premium experience.' }
         ]
       },
       payment: {
         title: 'Flexible Payments',
         subtitle: 'Split payments with zero interest using our supported payment partners.',
-        tabby: 'Tabby (Coming Soon)',
-        tamara: 'Tamara (Live)',
-        stripe: 'Stripe (Live)'
+        methods: [
+          { name: 'Tabby', status: 'Coming Soon' },
+          { name: 'Tamara', status: 'Live' },
+          { name: 'Stripe', status: 'Live' },
+          { name: 'Apple Pay', status: 'Live' }
+        ]
       },
-      gift: {
-        title: "Make Someone's Day",
-        subtitle: 'Send a Digital Gift Instantly',
-        description: 'Send salon, clinic, spa, gym, or fitness experiences to your loved ones in just a few taps.',
-        steps: [
-          { num: '1', icon: '🏰', title: 'Pick a Destination', desc: 'Choose from premium salons, clinics, gyms, spas & fitness centers' },
-          { num: '2', icon: '🎨', title: 'Customize Your Gift', desc: 'Select amount and pick a beautiful card theme' },
-          { num: '3', icon: '💝', title: 'Send with Love', desc: 'Instantly deliver joy to friends and loved ones' }
-        ],
-        amounts: ['100 AED', '200 AED', '500 AED'],
-        recipientName: "Recipient's name",
-        recipientContact: 'Phone or email',
-        sendButton: 'Send Gift Now',
-        cta: 'Send a Gift Now',
-        cardThemes: ['Ocean Teal', 'Champagne', 'Royal Gold', 'Deep Navy']
+      testimonials: {
+        eyebrow: 'Customer Reviews',
+        title: 'What Our Clients Say',
+        items: [
+          { name: 'Sara Al-Rashid', role: 'Regular Customer', rating: 5, text: 'MuchGlow made booking my clinic and spa appointments so easy! The gift card feature is perfect for surprising friends.' },
+          { name: 'Ahmed Hassan', role: 'Gym Owner', rating: 5, text: 'As a gym partner, MuchGlow has increased our memberships by 40%. The platform is professional and easy to use.' },
+          { name: 'Khalid Omar', role: 'Fitness Enthusiast', rating: 5, text: 'Love the flexible payment options! I can book gym sessions and spa treatments all in one place.' },
+          { name: 'Layla Mohammed', role: 'Corporate Client', rating: 5, text: 'We use MuchGlow for all our employee health and beauty gifts — gyms, spas, and clinics. The bulk ordering is fantastic!' }
+        ]
       },
       partner: {
-        label: 'Grow Your Business',
-        title: 'Become a Partner',
-        subtitle: 'Join clinics, salons, and fitness providers who use our platform to reach more customers',
+        eyebrow: 'Grow Your Business',
+        title: 'Unlock your',
+        titleHighlight: 'beauty business',
+        subtitle: 'Join clinics, salons and fitness providers using MuchGlow to reach more customers across the Gulf.',
         benefits: [
           'Access 50,000+ active users',
-          'Zero commission first 3 months',
+          'Zero commission for the first 3 months',
           'Free digital marketing tools',
-          'Advanced booking management',
-          '24/7 dedicated support'
+          'Advanced booking management & analytics',
+          '24/7 dedicated partner support'
         ],
         formTitle: 'Partner Registration',
         fields: {
@@ -156,117 +215,165 @@ const CompactLanding: React.FC<CompactLandingProps> = ({ lang = 'en' }) => {
           phone: 'Phone',
           country: 'Country',
           businessType: 'Business Type',
-          message: 'Message (Optional)'
+          message: 'Message (optional)'
         },
-        countries: ['UAE', 'Saudi Arabia', 'Kuwait', 'Qatar', 'Bahrain', 'Oman'],
-        businessTypes: ['Salon', 'Spa', 'Aesthetic Clinic', 'Medical Clinic', 'Health & Beauty Center', 'Gym', 'Fitness Center', 'Personal Training', 'Other'],
+        countries: ['United Arab Emirates', 'Saudi Arabia', 'Kuwait', 'Qatar', 'Bahrain', 'Oman'],
+        businessTypes: ['Beauty Salon', 'Clinic', 'Gym', 'Spa', 'Fitness Center', 'Personal Training', 'Other'],
         submit: 'Submit Application',
         submitting: 'Submitting...',
         success: 'Application submitted! We\'ll contact you within 24 hours.'
       },
-      testimonials: {
-        label: 'Customer Reviews',
-        title: 'What Our Clients Say',
-        items: [
-          { name: 'Sara Al-Rashid', role: 'Regular Customer', rating: 5, text: 'MuchGlow made booking my clinic and spa appointments so easy! The gift card feature is perfect for surprising friends.' },
-          { name: 'Ahmed Hassan', role: 'Gym Owner', rating: 5, text: 'As a gym partner, MuchGlow has increased our memberships by 40%. The platform is professional and easy to use.' },
-          { name: 'Khalid Omar', role: 'Fitness Enthusiast', rating: 5, text: 'Love the flexible payment options! I can book gym sessions and spa treatments all in one place.' },
-          { name: 'Layla Mohammed', role: 'Corporate Client', rating: 5, text: 'We use MuchGlow for all our employee health and beauty gifts - gyms, spas, and clinics. The bulk ordering is fantastic!' }
-        ]
-      },
       footer: {
-        desc: 'MuchGlow is a modern platform for beauty, health, and wellness services. We connect users with trusted clinics, salons, and fitness centers across GCC countries.',
+        desc: 'A modern UAE platform for beauty, health and wellness. We connect users with trusted clinics, salons and fitness centres across GCC countries.',
         headOffice: 'Head Office',
         address: 'Al Ain, UAE',
         getApp: 'Get the App',
-        appStore: 'App Store',
-        googlePlay: 'Google Play',
+        customerApp: 'Customer App',
+        partnerApp: 'Partner App',
         helpCenter: 'Help Center',
         terms: 'Terms & Conditions',
         privacy: 'Privacy Policy',
         copyright: 'All rights reserved'
+      },
+      phone: {
+        wallet: 'Wallet',
+        tier: 'Bronze Tier',
+        balance: 'Wallet Balance',
+        amount: '38.00',
+        currency: 'AED',
+        brandName: 'MuchGlow',
+        transactions: 'Transaction History',
+        points: 'Points History',
+        convert: 'Convert Points'
+      },
+      floatGift: {
+        label: '— Gift · Credit',
+        amount: 'AED 300',
+        sub: 'Credit'
+      },
+      floatSage: {
+        title: 'Face detected ✓',
+        sub: 'AI skin analysis ready'
       }
     },
     ar: {
+      announce: {
+        tag: 'حصري للتطبيق',
+        text: 'احصل على أفضل الأسعار عبر التطبيق — أقل من الحضور المباشر.',
+        cta: 'حمّل الآن'
+      },
       nav: {
         services: 'الخدمات',
+        giftCards: 'بطاقات الهدايا',
         howItWorks: 'كيف يعمل',
-        partners: 'الشركاء',
-        contact: 'اتصل بنا'
+        partners: 'الشركاء'
       },
       hero: {
-        badge: 'منصّة متكاملة لخدمات الصحة والجمال',
-        title: 'MuchGlow —',
-        titleHighlight: 'منصّتك الذكية للصحة والجمال',
-        subtitle: 'احجز مواعيدك، أرسل الهدايا الرقمية، اكتشف أفضل العيادات والصالونات، وتمتّع بخيارات دفع حديثة وآمنة.',
+        eyebrow: 'منصّة متكاملة لخدمات الصحة والجمال',
+        titleLine1: 'الجمال والعافية،',
+        titleLine2: 'بحجز أنيق.',
+        lead: 'احجز في الصالونات والعيادات والمنتجعات والنوادي في الإمارات بأسعار أقل من الحضور المباشر. أرسل هدايا رقمية، افحص بشرتك بالذكاء الاصطناعي، وادفع بالطريقة التي تناسبك — كل ذلك في تطبيق واحد.',
         ctaPrimary: 'حمّل التطبيق',
         ctaSecondary: 'كن شريكاً',
-        paymentLabel: 'طرق الدفع المدعومة:'
+        paymentLabel: 'طرق الدفع المدعومة'
       },
-      services: {
-        label: 'خدماتنا الرئيسية',
-        title: 'ما نقدمه',
-        subtitle: 'منصّة متعددة الخدمات: الصحة، الجمال، واللياقة',
+      appBanner: {
+        eyebrow: 'لماذا تحجز عبر التطبيق؟',
+        titleLine1: 'أسعار أفضل من',
+        titleLine2: 'الحضور المباشر.',
+        desc: 'شركاء MuchGlow يقدمون أسعاراً حصرية داخل التطبيق لن تجدها في المركز. احجز مسبقاً، تجاوز الانتظار، وادفع أقل — في كل مرة.',
+        perks: [
+          { icon: '💰', text: 'أسعار حصرية للتطبيق' },
+          { icon: '🎁', text: 'نقاط مكافأة عند الشحن' },
+          { icon: '📱', text: 'تجاوز طابور الانتظار' },
+          { icon: '💳', text: 'تقسيط بدون فوائد' }
+        ],
+        priceBadge: 'وفّر حتى 30%',
+        ctaPrimary: 'حمّل التطبيق',
+        ctaSecondary: 'تصفح الخدمات'
+      },
+      features: {
+        eyebrow: 'خدماتنا الرئيسية',
+        title: 'منظومة متكاملة للعناية الشخصية',
+        subtitle: 'الجمال والعافية واللياقة والرعاية الصحية — سوق واحد متصل مصمم للخليج.',
         items: [
-          { icon: '🎁', title: 'بطاقات هدايا رقمية', desc: 'أرسل هدايا فورية لأحبائك' },
-          { icon: '💇', title: 'خدمات الصالونات والتجميل', desc: 'احجز في أفضل صالونات التجميل' },
-          { icon: '🏥', title: 'العيادات الطبية والتجميلية', desc: 'خدمات طبية وتجميلية موثوقة' },
-          { icon: '💪', title: 'النوادي والمراكز الرياضية', desc: 'اشتراكات لياقة وتدريب شخصي' },
-          { icon: '🔍', title: 'البحث عن المنتجات عبر الصورة', desc: 'تقنية ذكية للبحث البصري' },
-          { icon: '🤖', title: 'تحليل الوجه بالذكاء الاصطناعي', desc: 'توصيات جمالية مخصصة لك' }
+          { num: '01', title: 'بطاقات هدايا رقمية', desc: 'أرسل هدايا فورية للجمال والعافية — رصيد أو تجربة صالون محددة — لأي شخص.' },
+          { num: '02', title: 'صالونات وحلاقة', desc: 'احجز مواعيد متميزة للشعر والتجميل والعناية مع مزودين معتمدين بالقرب منك.' },
+          { num: '03', title: 'عيادات طبية وتجميلية', desc: 'خدمات جلدية وتجميلية وعلاجية موثوقة، قابلة للحجز بالكامل عبر التطبيق.' },
+          { num: '04', title: 'النوادي واللياقة', desc: 'اشتراكات ومدربون شخصيون ومراكز لياقة — اكتشف وانضم في ثوانٍ.' },
+          { num: '05', title: 'اكتشاف ذكي', desc: 'ابحث حسب الفئة والموقع والتقييم والعروض — على الخريطة وفوري.' },
+          { num: '06', title: 'تحليل الوجه بالذكاء الاصطناعي', desc: 'افحص بشرتك واحصل على توصيات علاجية مخصصة في ثوانٍ.' }
+        ]
+      },
+      ai: {
+        eyebrow: 'بتقنية الذكاء الاصطناعي',
+        titleLine1: 'افحص بشرتك.',
+        titleLine2: 'تألّق بذكاء.',
+        desc: 'ارفع صورة لوجهك ودع الذكاء الاصطناعي في MuchGlow يحلل حالة بشرتك ويقترح العلاجات المناسبة — تنظيف البشرة، الترطيب، علاج حب الشباب، تجديد البشرة واستشارات العيادات.',
+        tags: ['علاجات البشرة', 'الترطيب', 'علاج حب الشباب', 'تجديد البشرة', 'الأمراض الجلدية'],
+        badge: 'تم كشف الوجه'
+      },
+      gift: {
+        eyebrow: 'اصنع يوماً مميزاً',
+        title: 'أرسل هدية رقمية',
+        titleHighlight: 'فورية',
+        subtitle: 'اختر المبلغ أو أهدِ تجربة صالون محددة. اختر تصميماً جميلاً وقدّم الفرح بنقرات قليلة.',
+        cta: 'أرسل هدية الآن',
+        steps: [
+          { num: '1', icon: '🏰', title: 'اختر الوجهة', desc: 'اختر من الصالونات والعيادات والنوادي والمنتجعات' },
+          { num: '2', icon: '🎨', title: 'خصص هديتك', desc: 'اختر المبلغ وتصميم البطاقة الجميل' },
+          { num: '3', icon: '💝', title: 'أرسل بحب', desc: 'اسعد أصدقاءك وأحبائك فوراً' }
         ]
       },
       whyUs: {
-        label: 'لماذا MuchGlow',
-        title: 'لماذا تختارنا',
+        eyebrow: 'لماذا MuchGlow',
+        title: 'تصميم راقٍ',
         items: [
-          { icon: <Clock size={28} />, title: 'حجز سريع وسهل', desc: 'احجز في ثوانٍ، في أي وقت' },
-          { icon: <Shield size={28} />, title: 'مدفوعات آمنة', desc: 'دفع آمن عبر الإنترنت' },
-          { icon: <Star size={28} />, title: 'عيادات وصالونات موثوقة', desc: 'شركاء معتمدون ومختارون' },
-          { icon: <Sparkles size={28} />, title: 'مزايا ذكية بالذكاء الاصطناعي', desc: 'تقنيات متطورة لخدمتك' }
+          { label: 'الحجز', title: 'سريع وسهل', desc: 'احجز في ثوانٍ، في أي وقت ومن أي جهاز.' },
+          { label: 'المدفوعات', title: 'آمنة بالكامل', desc: 'Stripe Connect و Apple Pay والتقسيط — آمنة ومحمية.' },
+          { label: 'الثقة', title: 'شركاء معتمدون', desc: 'عيادات وصالونات موثوقة ومراجعة.' },
+          { label: 'الذكاء', title: 'مزايا ذكية', desc: 'توصيات مبنية على تحليل حقيقي.' }
         ]
       },
       howItWorks: {
-        label: 'كيف يعمل',
+        eyebrow: 'كيف يعمل',
         title: 'ثلاث خطوات بسيطة',
         steps: [
-          { num: '1', title: 'اكتشف الخدمات', desc: 'تصفح الصالونات والعيادات والنوادي' },
-          { num: '2', title: 'اختر الموعد المناسب', desc: 'حدد الوقت والخدمة المطلوبة' },
-          { num: '3', title: 'استمتع بتجربتك', desc: 'احضر واستمتع بخدمة مميزة' }
+          { num: '1', title: 'اكتشف الخدمات', desc: 'تصفح الصالونات والعيادات والنوادي بالقرب منك.' },
+          { num: '2', title: 'اختر الموعد', desc: 'حدد الوقت والخدمة المناسبة.' },
+          { num: '3', title: 'استمتع وتألّق', desc: 'احضر واسترخِ واستمتع بتجربة مميزة.' }
         ]
       },
       payment: {
         title: 'خيارات دفع مرنة',
         subtitle: 'قسّط مدفوعاتك بدون فوائد مع شركاء الدفع المدعومين.',
-        tabby: 'Tabby (قريبًا)',
-        tamara: 'Tamara (متاح)',
-        stripe: 'Stripe (متاح)'
+        methods: [
+          { name: 'Tabby', status: 'قريبًا' },
+          { name: 'Tamara', status: 'متاح' },
+          { name: 'Stripe', status: 'متاح' },
+          { name: 'Apple Pay', status: 'متاح' }
+        ]
       },
-      gift: {
-        title: 'اصنع يوماً مميزاً',
-        subtitle: 'أرسل هدية رقمية فورية',
-        description: 'أرسل تجارب الصالون والعيادة والسبا والنادي الرياضي لأحبائك ببضع نقرات.',
-        steps: [
-          { num: '1', icon: '🏰', title: 'اختر الوجهة', desc: 'اختر من الصالونات والعيادات والنوادي والمنتجعات' },
-          { num: '2', icon: '🎨', title: 'خصص هديتك', desc: 'اختر المبلغ وتصميم البطاقة الجميل' },
-          { num: '3', icon: '💝', title: 'أرسل بحب', desc: 'اسعد أصدقاءك وأحبائك فوراً' }
-        ],
-        amounts: ['100 درهم', '200 درهم', '500 درهم'],
-        recipientName: 'اسم المستلم',
-        recipientContact: 'الهاتف أو البريد',
-        sendButton: 'أرسل الهدية الآن',
-        cta: 'أرسل هدية الآن',
-        cardThemes: ['أزرق محيطي', 'شامبانيا', 'ذهبي ملكي', 'كحلي غامق']
+      testimonials: {
+        eyebrow: 'آراء العملاء',
+        title: 'ماذا يقول عملاؤنا',
+        items: [
+          { name: 'سارة الراشد', role: 'عميلة منتظمة', rating: 5, text: 'MuchGlow جعل حجز مواعيد العيادات والسبا سهلاً جداً! ميزة بطاقات الهدايا مثالية لمفاجأة الأصدقاء.' },
+          { name: 'أحمد حسن', role: 'صاحب نادي رياضي', rating: 5, text: 'كشريك نادي رياضي، زاد MuchGlow اشتراكاتنا بنسبة 40%. المنصة احترافية وسهلة الاستخدام.' },
+          { name: 'خالد عمر', role: 'عاشق اللياقة', rating: 5, text: 'أحب خيارات الدفع المرنة! أستطيع حجز تمارين النادي والسبا في مكان واحد.' },
+          { name: 'ليلى محمد', role: 'عميلة شركات', rating: 5, text: 'نستخدم MuchGlow لجميع هدايا الصحة والجمال للموظفين — النوادي والمنتجعات والعيادات. نظام الطلب بالجملة رائع!' }
+        ]
       },
       partner: {
-        label: 'نمِّ أعمالك',
-        title: 'كن شريكاً مع MuchGlow',
-        subtitle: 'انضم إلى العيادات والصالونات ومراكز اللياقة التي تستخدم منصّتنا للوصول إلى المزيد من العملاء',
+        eyebrow: 'نمِّ أعمالك',
+        title: 'أطلق العنان',
+        titleHighlight: 'لأعمالك التجميلية',
+        subtitle: 'انضم إلى العيادات والصالونات ومراكز اللياقة التي تستخدم MuchGlow للوصول إلى المزيد من العملاء في الخليج.',
         benefits: [
           'الوصول إلى أكثر من 50,000 مستخدم نشط',
           'صفر عمولة لأول 3 أشهر',
           'أدوات تسويق رقمي مجانية',
-          'إدارة حجوزات متقدمة',
+          'إدارة حجوزات متقدمة وتحليلات',
           'دعم مخصص 24/7'
         ],
         formTitle: 'نموذج الشراكة',
@@ -280,50 +387,66 @@ const CompactLanding: React.FC<CompactLandingProps> = ({ lang = 'en' }) => {
           message: 'الرسالة (اختياري)'
         },
         countries: ['الإمارات', 'السعودية', 'الكويت', 'قطر', 'البحرين', 'عُمان'],
-        businessTypes: ['صالون', 'سبا', 'عيادة تجميل', 'عيادة طبية', 'مركز صحة وجمال', 'نادي رياضي', 'مركز لياقة', 'تدريب شخصي', 'أخرى'],
+        businessTypes: ['صالون تجميل', 'عيادة', 'نادي رياضي', 'سبا', 'مركز لياقة', 'تدريب شخصي', 'أخرى'],
         submit: 'إرسال الطلب',
         submitting: 'جاري الإرسال...',
         success: 'تم إرسال الطلب! سنتواصل معك خلال 24 ساعة.'
       },
-      testimonials: {
-        label: 'آراء العملاء',
-        title: 'ماذا يقول عملاؤنا',
-        items: [
-          { name: 'سارة الراشد', role: 'عميلة منتظمة', rating: 5, text: 'MuchGlow جعل حجز مواعيد العيادات والسبا سهلاً جداً! ميزة بطاقات الهدايا مثالية لمفاجأة الأصدقاء.' },
-          { name: 'أحمد حسن', role: 'صاحب نادي رياضي', rating: 5, text: 'كشريك نادي رياضي، زاد MuchGlow اشتراكاتنا بنسبة 40%. المنصة احترافية وسهلة الاستخدام.' },
-          { name: 'خالد عمر', role: 'عاشق اللياقة', rating: 5, text: 'أحب خيارات الدفع المرنة! أستطيع حجز تمارين النادي والسبا في مكان واحد.' },
-          { name: 'ليلى محمد', role: 'عميلة شركات', rating: 5, text: 'نستخدم MuchGlow لجميع هدايا الصحة والجمال للموظفين - النوادي والمنتجعات والعيادات. نظام الطلب بالجملة رائع!' }
-        ]
-      },
       footer: {
-        desc: 'MuchGlow هي منصّة حديثة لخدمات الصحة والجمال. نربط المستخدمين بأفضل العيادات والصالونات ومراكز اللياقة في دول الخليج.',
+        desc: 'منصّة إماراتية حديثة لخدمات الصحة والجمال والعافية. نربط المستخدمين بأفضل العيادات والصالونات ومراكز اللياقة في دول الخليج.',
         headOffice: 'المكتب الرئيسي',
         address: 'العين، الإمارات',
         getApp: 'حمّل التطبيق',
-        appStore: 'App Store',
-        googlePlay: 'Google Play',
+        customerApp: 'تطبيق العملاء',
+        partnerApp: 'تطبيق الشركاء',
         helpCenter: 'مركز المساعدة',
         terms: 'الشروط والأحكام',
         privacy: 'سياسة الخصوصية',
         copyright: 'جميع الحقوق محفوظة'
+      },
+      phone: {
+        wallet: 'المحفظة',
+        tier: 'الفئة البرونزية',
+        balance: 'رصيد المحفظة',
+        amount: '38.00',
+        currency: 'د.إ',
+        brandName: 'MuchGlow',
+        transactions: 'سجل المعاملات',
+        points: 'سجل النقاط',
+        convert: 'تحويل النقاط'
+      },
+      floatGift: {
+        label: '— هدية · رصيد',
+        amount: '300 د.إ',
+        sub: 'رصيد'
+      },
+      floatSage: {
+        title: 'تم كشف الوجه ✓',
+        sub: 'تحليل البشرة جاهز'
       }
     }
   };
 
   const t = content[lang];
 
-  // Handle form input changes
+  const featureIcons = [
+    <Gift key="gift" size={26} strokeWidth={1.8} />,
+    <Scissors key="scissors" size={26} strokeWidth={1.8} />,
+    <Plus key="plus" size={26} strokeWidth={1.8} />,
+    <Activity key="activity" size={26} strokeWidth={1.8} />,
+    <Search key="search" size={26} strokeWidth={1.8} />,
+    <ScanFace key="scanface" size={26} strokeWidth={1.8} />
+  ];
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // Handle form submission - sends email to admin@muchglow.com
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setFormLoading(true);
 
     try {
-      // Send to both local API and MuchGlow API
       const payload = {
         companyName: formData.companyName,
         contactPerson: formData.contactPerson,
@@ -334,14 +457,12 @@ const CompactLanding: React.FC<CompactLandingProps> = ({ lang = 'en' }) => {
         message: formData.message
       };
 
-      // Try local API first (handles email to admin@muchglow.com)
       const localResponse = await fetch('/api/partner', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
       });
 
-      // Also try external API as backup
       const apiPayload = {
         salonName: formData.companyName,
         phoneNumber: formData.phone.replace(/[^\d+]/g, ''),
@@ -356,7 +477,7 @@ const CompactLanding: React.FC<CompactLandingProps> = ({ lang = 'en' }) => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(apiPayload),
-      }).catch(() => {}); // Silent fail for backup
+      }).catch(() => {});
 
       if (localResponse.ok) {
         setFormSuccess(true);
@@ -381,54 +502,51 @@ const CompactLanding: React.FC<CompactLandingProps> = ({ lang = 'en' }) => {
     }
   };
 
+  // Brand logo component
+  const BrandLogo = ({ size = 38 }: { size?: number }) => (
+    <Image
+      src="/logomuchglow.png"
+      alt="MuchGlow"
+      width={size}
+      height={size}
+      style={{ borderRadius: '50%', objectFit: 'cover' }}
+    />
+  );
+
   return (
-    <div dir={isRTL ? 'rtl' : 'ltr'} className={isRTL ? 'rtl' : ''}>
+    <div dir={isRTL ? 'rtl' : 'ltr'}>
+      {/* ============ ANNOUNCEMENT BAR ============ */}
+      <div className="lux-announce">
+        <span className="lux-announce-tag">{t.announce.tag}</span>
+        <span>{t.announce.text}</span>
+        <a href="https://apps.apple.com/ca/app/muchglow/id6747438635" target="_blank" rel="noopener noreferrer">{t.announce.cta} →</a>
+      </div>
+
       {/* ============ NAVIGATION ============ */}
-      <nav className={`mg-navbar ${isScrolled ? 'scrolled' : ''}`}>
-        <div className="mg-container mg-navbar-content">
-          <Link href="/" className="mg-nav-logo">
-            <motion.div
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <Image src={MuchGlowLogo} alt="MuchGlow" height={80} width={250} priority />
-            </motion.div>
+      <nav className={`lux-nav ${isScrolled ? 'scrolled' : ''}`}>
+        <div className="lux-wrap lux-nav-inner">
+          <Link href={`/${lang}`} className="lux-brand">
+            <span className="lux-mark"><BrandLogo /></span>
+            MuchGlow
           </Link>
 
-          {/* Desktop Navigation */}
-          <ul className="mg-nav-links">
-            <li>
-              <a href="#services" className={`mg-nav-link ${activeSection === 'services' ? 'active' : ''}`}>
-                {t.nav.services}
-              </a>
-            </li>
-            <li>
-              <a href="#gift" className={`mg-nav-link ${activeSection === 'gift' ? 'active' : ''}`}>
-                Gift Cards
-              </a>
-            </li>
-            <li>
-              <a href="#how-it-works" className={`mg-nav-link ${activeSection === 'how-it-works' ? 'active' : ''}`}>
-                {t.nav.howItWorks}
-              </a>
-            </li>
-            <li>
-              <a href="#partner" className={`mg-nav-link ${activeSection === 'partner' ? 'active' : ''}`}>
-                {t.nav.partners}
-              </a>
-            </li>
+          <ul className="lux-nav-links">
+            <li><a href="#features" className={activeSection === 'features' ? 'active' : ''}>{t.nav.services}</a></li>
+            <li><a href="#gift" className={activeSection === 'gift' ? 'active' : ''}>{t.nav.giftCards}</a></li>
+            <li><a href="#how-it-works" className={activeSection === 'how-it-works' ? 'active' : ''}>{t.nav.howItWorks}</a></li>
+            <li><a href="#partner" className={activeSection === 'partner' ? 'active' : ''}>{t.nav.partners}</a></li>
           </ul>
 
-          <div className="mg-nav-actions">
-            {/* Language Switcher */}
-            <div className="mg-lang-switch">
-              <Link href="/en" className={`mg-lang-btn ${lang === 'en' ? 'active' : ''}`}>EN</Link>
-              <Link href="/ar" className={`mg-lang-btn ${lang === 'ar' ? 'active' : ''}`}>AR</Link>
+          <div className="lux-nav-right">
+            <div className="lux-lang">
+              <Link href="/en" className={lang === 'en' ? 'on' : ''}>EN</Link>
+              <Link href="/ar" className={lang === 'ar' ? 'on' : ''}>AR</Link>
             </div>
-
-            {/* Mobile Menu Button */}
+            <a href="https://apps.apple.com/ca/app/muchglow/id6747438635" className="lux-btn lux-btn-gold" target="_blank" rel="noopener noreferrer">
+              {t.hero.ctaPrimary}
+            </a>
             <button
-              className="mg-menu-btn"
+              className="lux-menu-btn"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-label="Toggle menu"
             >
@@ -441,720 +559,541 @@ const CompactLanding: React.FC<CompactLandingProps> = ({ lang = 'en' }) => {
         <AnimatePresence>
           {mobileMenuOpen && (
             <motion.div
-              className="mg-mobile-menu active"
-              initial={{ opacity: 0, x: isRTL ? -100 : 100 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: isRTL ? -100 : 100 }}
-              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+              className="lux-mobile-menu"
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.2 }}
             >
-              <ul className="mg-mobile-nav-links">
+              <ul>
                 {[
-                  { href: '#services', label: t.nav.services },
-                  { href: '#gift', label: 'Gift Cards' },
+                  { href: '#features', label: t.nav.services },
+                  { href: '#gift', label: t.nav.giftCards },
                   { href: '#how-it-works', label: t.nav.howItWorks },
-                  { href: '#partner', label: t.nav.partners },
-                  { href: '#footer', label: t.nav.contact }
-                ].map((item, index) => (
-                  <motion.li
-                    key={item.href}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.1, duration: 0.3 }}
-                  >
-                    <a href={item.href} className="mg-mobile-nav-link" onClick={() => setMobileMenuOpen(false)}>
+                  { href: '#partner', label: t.nav.partners }
+                ].map((item) => (
+                  <li key={item.href}>
+                    <a href={item.href} onClick={() => setMobileMenuOpen(false)}>
                       {item.label}
                     </a>
-                  </motion.li>
+                  </li>
                 ))}
               </ul>
-              {/* Language Switcher in Mobile Menu */}
-              <motion.div
-                style={{ marginTop: '1.5rem', display: 'flex', justifyContent: 'center' }}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4, duration: 0.3 }}
-              >
-                <div className="mg-lang-switch" style={{ display: 'flex' }}>
-                  <Link href="/en" className={`mg-lang-btn ${lang === 'en' ? 'active' : ''}`} onClick={() => setMobileMenuOpen(false)}>EN</Link>
-                  <Link href="/ar" className={`mg-lang-btn ${lang === 'ar' ? 'active' : ''}`} onClick={() => setMobileMenuOpen(false)}>AR</Link>
+              <div style={{ marginTop: '1.5rem', display: 'flex', justifyContent: 'center' }}>
+                <div className="lux-lang">
+                  <Link href="/en" className={lang === 'en' ? 'on' : ''} onClick={() => setMobileMenuOpen(false)}>EN</Link>
+                  <Link href="/ar" className={lang === 'ar' ? 'on' : ''} onClick={() => setMobileMenuOpen(false)}>AR</Link>
                 </div>
-              </motion.div>
-
-              <motion.div
-                style={{ marginTop: '1rem', display: 'flex', gap: '1rem' }}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5, duration: 0.3 }}
-              >
-                <a href="#partner" className="mg-btn mg-btn-primary" style={{ flex: 1, textAlign: 'center' }} onClick={() => setMobileMenuOpen(false)}>
-                  {t.hero.ctaSecondary}
+              </div>
+              <div style={{ marginTop: '1rem', display: 'flex', justifyContent: 'center' }}>
+                <a href="https://apps.apple.com/ca/app/muchglow/id6747438635" className="lux-btn lux-btn-gold" target="_blank" rel="noopener noreferrer" onClick={() => setMobileMenuOpen(false)}>
+                  {t.hero.ctaPrimary} →
                 </a>
-              </motion.div>
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
       </nav>
 
-      {/* ============ HERO SECTION ============ */}
-      <section className="mg-hero">
-        <div className="mg-container">
-          <div className="mg-hero-content">
-            <motion.div
-              className="mg-hero-text"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              <span className="mg-hero-badge">
-                <Sparkles size={16} />
-                {t.hero.badge}
-              </span>
+      {/* ============ HERO ============ */}
+      <header className="lux-hero">
+        <div className="lux-grain" />
+        <div className="lux-wrap lux-hero-grid">
+          <div className="lux-reveal in">
+            <span className="lux-eyebrow">{t.hero.eyebrow}</span>
+            <h1>
+              {t.hero.titleLine1}<br />
+              <span className="lux-serif-italic">{t.hero.titleLine2}</span>
+            </h1>
+            <p className="lux-lead">{t.hero.lead}</p>
+            <div className="lux-hero-cta">
+              <a href="https://apps.apple.com/ca/app/muchglow/id6747438635" className="lux-btn lux-btn-gold" target="_blank" rel="noopener noreferrer">
+                {t.hero.ctaPrimary} →
+              </a>
+              <a href="#partner" className="lux-btn lux-btn-ghost">
+                {t.hero.ctaSecondary}
+              </a>
+            </div>
+            <div className="lux-pay-row">
+              <span className="lux-pay-label">{t.hero.paymentLabel}</span>
+              <span className="lux-pay-chip">Tabby</span>
+              <span className="lux-pay-chip">Tamara</span>
+              <span className="lux-pay-chip">Stripe</span>
+              <span className="lux-pay-chip">Apple&nbsp;Pay</span>
+            </div>
+          </div>
 
-              <h1 className="mg-hero-title">
-                {t.hero.title}
-                <br />
-                <span className="mg-gradient-text">{t.hero.titleHighlight}</span>
-              </h1>
-
-              <p className="mg-hero-subtitle">{t.hero.subtitle}</p>
-
-              <div className="mg-hero-buttons">
-                <a href="#services" className="mg-btn mg-btn-primary mg-btn-lg mg-btn-mobile-full">
-                  {t.hero.ctaPrimary}
-                  <ArrowRight size={18} />
-                </a>
-                <a href="#partner" className="mg-btn mg-btn-secondary mg-btn-lg mg-btn-mobile-full">
-                  {t.hero.ctaSecondary}
-                </a>
-              </div>
-
-              <div className="mg-payment-logos">
-                <span>{t.hero.paymentLabel}</span>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                  <span style={{ fontWeight: 700, color: '#3DBFBF' }}>Tabby</span>
-                  <span style={{ fontWeight: 700, color: '#FFA700' }}>Tamara</span>
-                  <span style={{ fontWeight: 700, color: '#635BFF' }}>Stripe</span>
-                </div>
-              </div>
-            </motion.div>
-
-            <motion.div
-              className="mg-hero-visual"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              <div className="mg-app-screenshot mg-animate-float">
+          {/* Phone Visual — Real App Screenshot */}
+          <div className="lux-phone-stage lux-reveal in">
+            <div className="lux-glow-ring" />
+            <div className="lux-float-gift">
+              <div className="lux-fg-lab">{t.floatGift.label}</div>
+              <div className="lux-fg-amt">{t.floatGift.amount} <em>{t.floatGift.sub}</em></div>
+            </div>
+            <div className="lux-phone">
+              <div className="lux-phone-screen-img">
                 <Image
-                  src="/appfeat.webp"
-                  alt="MuchGlow App - Book beauty and health services"
-                  width={380}
-                  height={760}
-                  style={{
-                    borderRadius: '32px',
-                    boxShadow: '0 25px 80px rgba(0, 0, 0, 0.25)',
-                    maxWidth: '100%',
-                    height: 'auto'
-                  }}
+                  src="/app-home.jpg"
+                  alt="MuchGlow App — Browse salons, clinics and beauty services"
+                  width={576}
+                  height={1248}
                   priority
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top center' }}
                 />
               </div>
-            </motion.div>
+            </div>
+            <div className="lux-float-sage">
+              <b>{t.floatSage.title}</b>
+              <span className="lux-float-sage-sub">{t.floatSage.sub}</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      {/* ============ FEATURES ============ */}
+      <section id="features" className="lux-section">
+        <div className="lux-wrap">
+          <div className="lux-sec-head lux-reveal">
+            <span className="lux-eyebrow">{t.features.eyebrow}</span>
+            <h2>{t.features.title}</h2>
+            <p>{t.features.subtitle}</p>
+          </div>
+          <div className="lux-feat-grid">
+            {t.features.items.map((item, index) => (
+              <div key={index} className="lux-feat lux-reveal">
+                <span className="lux-feat-num">{item.num}</span>
+                <div className="lux-feat-ico">{featureIcons[index]}</div>
+                <h3>{item.title}</h3>
+                <p>{item.desc}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* ============ SERVICES SECTION ============ */}
-      <section id="services" className="mg-section mg-services">
-        <div className="mg-container">
-          <div className="mg-section-header">
-            <span className="mg-section-label">{t.services.label}</span>
-            <h2 className="mg-section-title">{t.services.title}</h2>
-            <p className="mg-section-desc">{t.services.subtitle}</p>
-          </div>
-
-          <div className="mg-grid mg-grid-4">
-            {t.services.items.map((service, index) => (
-              <motion.div
-                key={index}
-                className="mg-service-card"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: index * 0.1 }}
-                viewport={{ once: true }}
-              >
-                <div className="mg-service-icon">{service.icon}</div>
-                <h3 className="mg-service-name">{service.title}</h3>
-                <p className="mg-service-desc">{service.desc}</p>
-              </motion.div>
-            ))}
+      {/* ============ AI BAND (Dark) ============ */}
+      <section className="lux-section" style={{ paddingTop: 0 }}>
+        <div className="lux-wrap">
+          <div className="lux-ai-band lux-reveal">
+            <div>
+              <span className="lux-eyebrow">{t.ai.eyebrow}</span>
+              <h2>
+                {t.ai.titleLine1}<br />
+                <span className="lux-serif-italic" style={{ color: 'var(--gold-300)' }}>{t.ai.titleLine2}</span>
+              </h2>
+              <p>{t.ai.desc}</p>
+              <div className="lux-ai-rec">
+                {t.ai.tags.map((tag, i) => (
+                  <span key={i}>{tag}</span>
+                ))}
+              </div>
+            </div>
+            <div style={{ display: 'flex', gap: '14px', justifyContent: 'center', alignItems: 'flex-start' }}>
+              <div className="lux-ai-phone">
+                <Image
+                  src="/app-ai-scan.jpg"
+                  alt="MuchGlow AI — Scan your face"
+                  width={400}
+                  height={868}
+                  loading="lazy"
+                  style={{ width: '100%', height: 'auto' }}
+                />
+              </div>
+              <div className="lux-ai-phone" style={{ marginTop: '30px' }}>
+                <Image
+                  src="/app-ai-results.png"
+                  alt="MuchGlow AI — Skin scan results with confidence scores"
+                  width={400}
+                  height={868}
+                  loading="lazy"
+                  style={{ width: '100%', height: 'auto' }}
+                />
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* ============ GIFT SECTION ============ */}
-      <section id="gift" className="mg-gift-section">
-        <div className="mg-container">
-          <motion.div
-            className="mg-section-header"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="mg-gift-title">
-              <span className="mg-gradient-text">{t.gift.title}</span>
-              <br />
-              {t.gift.subtitle}
-            </h2>
-            <p className="mg-section-desc">{t.gift.description}</p>
-          </motion.div>
-
-          <div className="mg-gift-content">
-            {/* Left Side - Phone Mockup */}
-            <motion.div
-              className="mg-gift-mockup"
-              initial={{ opacity: 0, x: isRTL ? 50 : -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-            >
-              <div className="mg-phone-frame">
-                <div className="mg-phone-notch"></div>
-                <div className="mg-phone-screen">
-                  <div className="mg-gift-interface">
-                    <h4 className="mg-gift-header">🎁 {t.gift.sendButton}</h4>
-
-                    {/* Gift Card Themes */}
-                    <div className="mg-gift-cards-row">
-                      {[
-                        { theme: t.gift.cardThemes[0], color: '#0891B2' },
-                        { theme: t.gift.cardThemes[1], color: '#F7E7CE' },
-                        { theme: t.gift.cardThemes[2], color: '#D97706' },
-                        { theme: t.gift.cardThemes[3], color: '#1E3A5F' }
-                      ].map((card, idx) => (
-                        <motion.div
-                          key={idx}
-                          className="mg-gift-card-mini"
-                          style={{ backgroundColor: card.color }}
-                          whileHover={{ scale: 1.1, rotate: 5 }}
-                        >
-                          <span>{card.theme}</span>
-                        </motion.div>
-                      ))}
-                    </div>
-
-                    {/* Amount Buttons */}
-                    <div className="mg-amount-buttons">
-                      {t.gift.amounts.map((amount, idx) => (
-                        <button
-                          key={idx}
-                          className={`mg-amount-btn ${idx === 1 ? 'active' : ''}`}
-                        >
-                          {amount}
-                        </button>
-                      ))}
-                    </div>
-
-                    {/* Inputs */}
-                    <div className="mg-gift-inputs">
-                      <input type="text" placeholder={t.gift.recipientName} readOnly />
-                      <input type="text" placeholder={t.gift.recipientContact} readOnly />
-                    </div>
-
-                    {/* Send Button */}
-                    <motion.button
-                      className="mg-gift-send-btn"
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                    >
-                      🎁 {t.gift.sendButton}
-                    </motion.button>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Right Side - Happy Recipient */}
-            <motion.div
-              className="mg-gift-recipient"
-              initial={{ opacity: 0, x: isRTL ? -50 : 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-            >
-              <div className="mg-recipient-card">
-                <div className="mg-glow-bg"></div>
-                <div className="mg-happy-person">
-                  <motion.div
-                    className="mg-person-emoji"
-                    animate={{ scale: [1, 1.1, 1] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                  >
-                    😊
-                  </motion.div>
-                  <motion.div
-                    className="mg-notification-bubble"
-                    animate={{ y: [0, -5, 0] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                  >
-                    🎁 You&apos;ve received a beauty gift!
-                  </motion.div>
-                </div>
-                <div className="mg-floating-hearts">
-                  <motion.span
-                    animate={{ y: [-10, 10, -10], opacity: [0.5, 1, 0.5] }}
-                    transition={{ duration: 3, repeat: Infinity }}
-                    style={{ position: 'absolute', top: '20%', left: '10%' }}
-                  >💖</motion.span>
-                  <motion.span
-                    animate={{ y: [10, -10, 10], opacity: [0.5, 1, 0.5] }}
-                    transition={{ duration: 4, repeat: Infinity, delay: 1 }}
-                    style={{ position: 'absolute', top: '60%', right: '15%' }}
-                  >💕</motion.span>
-                  <motion.span
-                    animate={{ y: [-5, 15, -5], opacity: [0.5, 1, 0.5] }}
-                    transition={{ duration: 3.5, repeat: Infinity, delay: 0.5 }}
-                    style={{ position: 'absolute', bottom: '25%', left: '20%' }}
-                  >✨</motion.span>
-                </div>
-              </div>
-            </motion.div>
+      <section id="gift" className="lux-section lux-gift-section">
+        <div className="lux-wrap">
+          <div className="lux-sec-head lux-reveal">
+            <span className="lux-eyebrow">{t.gift.eyebrow}</span>
+            <h2>{t.gift.title} <span className="lux-serif-italic">{t.gift.titleHighlight}</span></h2>
+            <p>{t.gift.subtitle}</p>
+          </div>
+          <div className="lux-gift-grid">
+            <div className="lux-gift-card lux-g-sage lux-reveal">
+              <span className="lux-gc-arc" />
+              <div className="lux-gc-lab">— Credit</div>
+              <div className="lux-gc-amt">100<small> AED</small></div>
+            </div>
+            <div className="lux-gift-card lux-g-gold lux-reveal">
+              <span className="lux-gc-arc" />
+              <div className="lux-gc-lab">— Credit</div>
+              <div className="lux-gc-amt">250<small> AED</small></div>
+            </div>
+            <div className="lux-gift-card lux-g-ink lux-reveal">
+              <span className="lux-gc-arc" />
+              <div className="lux-gc-lab">— Credit</div>
+              <div className="lux-gc-amt">500<small> AED</small></div>
+            </div>
           </div>
 
-          {/* 3 Steps */}
-          <motion.div
-            className="mg-gift-steps"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ once: true }}
-          >
-            <div className="mg-grid mg-grid-3">
-              {t.gift.steps.map((step, index) => (
-                <motion.div
-                  key={index}
-                  className="mg-gift-step-card"
-                  whileHover={{ scale: 1.05, y: -5 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <div className="mg-step-header">
-                    <span className="mg-step-num">{step.num}</span>
-                    <span className="mg-step-icon">{step.icon}</span>
-                  </div>
-                  <h4>{step.title}</h4>
-                  <p>{step.desc}</p>
-                </motion.div>
-              ))}
+          {/* Real app screenshot — gift flow */}
+          <div className="lux-reveal" style={{ display: 'flex', justifyContent: 'center', margin: '40px 0' }}>
+            <div className="lux-showcase-phone" style={{ width: '220px' }}>
+              <Image src="/app-send-gift-v2.png" alt="MuchGlow — Send gift cards in the app" width={440} height={880} loading="lazy" style={{ width: '100%', height: 'auto' }} />
             </div>
-          </motion.div>
+          </div>
 
-          {/* CTA Button */}
-          <motion.div
-            className="mg-text-center mg-mt-xl"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            viewport={{ once: true }}
-          >
-            <motion.button
-              className="mg-btn mg-btn-primary mg-btn-lg"
-              whileHover={{ scale: 1.05, boxShadow: '0 0 30px rgba(231, 84, 129, 0.4)' }}
-              whileTap={{ scale: 0.95 }}
-            >
-              🎁 {t.gift.cta} <ArrowRight size={18} />
-            </motion.button>
-          </motion.div>
+          {/* 3-step gift process */}
+          <div className="lux-gift-steps">
+            {t.gift.steps.map((step, index) => (
+              <div key={index} className="lux-gift-step lux-reveal">
+                <span className="lux-gift-step-icon">{step.icon}</span>
+                <span className="lux-gift-step-num">{step.num}</span>
+                <h4>{step.title}</h4>
+                <p>{step.desc}</p>
+              </div>
+            ))}
+          </div>
 
-          {/* Gift Card Showcase */}
-          <motion.div
-            className="mg-gift-showcase"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            viewport={{ once: true }}
-          >
-            <p className="mg-showcase-label">Choose from beautiful gift card designs</p>
-            <div className="mg-showcase-cards">
-              {[
-                { theme: t.gift.cardThemes[0], color: '#0891B2' },
-                { theme: t.gift.cardThemes[1], color: '#F7E7CE' },
-                { theme: t.gift.cardThemes[2], color: '#D97706' },
-                { theme: t.gift.cardThemes[3], color: '#1E3A5F' }
-              ].map((card, idx) => (
-                <motion.div
-                  key={idx}
-                  className="mg-showcase-card"
-                  style={{ backgroundColor: card.color }}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: idx * 0.1 }}
-                  viewport={{ once: true }}
-                  whileHover={{ scale: 1.1, rotate: 5 }}
-                >
-                  <div className="mg-card-pattern"></div>
-                  <span className="mg-card-theme">{card.theme}</span>
-                  <span className="mg-card-amount">200 AED</span>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
+          <div style={{ textAlign: 'center', marginTop: '36px' }}>
+            <a href="https://apps.apple.com/ca/app/muchglow/id6747438635" className="lux-btn lux-btn-gold" target="_blank" rel="noopener noreferrer">
+              {t.gift.cta} →
+            </a>
+          </div>
         </div>
       </section>
 
       {/* ============ WHY CHOOSE US ============ */}
-      <section className="mg-section mg-why-choose">
-        <div className="mg-container">
-          <div className="mg-section-header">
-            <span className="mg-section-label">{t.whyUs.label}</span>
-            <h2 className="mg-section-title">{t.whyUs.title}</h2>
+      <section className="lux-section">
+        <div className="lux-wrap">
+          <div className="lux-sec-head lux-reveal">
+            <span className="lux-eyebrow">{t.whyUs.eyebrow}</span>
+            <h2>{t.whyUs.title}</h2>
           </div>
-
-          <div className="mg-grid mg-grid-4">
+          <div className="lux-why-grid">
             {t.whyUs.items.map((item, index) => (
-              <motion.div
-                key={index}
-                className="mg-feature-item"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: index * 0.1 }}
-                viewport={{ once: true }}
-              >
-                <div className="mg-feature-icon">{item.icon}</div>
-                <h4 className="mg-feature-title">{item.title}</h4>
-                <p className="mg-feature-desc">{item.desc}</p>
-              </motion.div>
+              <div key={index} className="lux-why lux-reveal">
+                <div className="lux-wlab">{item.label}</div>
+                <h3>{item.title}</h3>
+                <p>{item.desc}</p>
+              </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ============ APP ADVANTAGE BANNER ============ */}
+      <section className="lux-section">
+        <div className="lux-wrap">
+          <div className="lux-app-banner lux-reveal">
+            <div>
+              <span className="lux-eyebrow">{t.appBanner.eyebrow}</span>
+              <h2>
+                {t.appBanner.titleLine1}<br />
+                <span className="lux-serif-italic" style={{ color: 'var(--gold-300)' }}>{t.appBanner.titleLine2}</span>
+              </h2>
+              <p className="lux-app-banner-desc">{t.appBanner.desc}</p>
+              <div className="lux-app-perks">
+                {t.appBanner.perks.map((perk, i) => (
+                  <span key={i} className="lux-app-perk">
+                    <span className="lux-app-perk-icon">{perk.icon}</span>
+                    {perk.text}
+                  </span>
+                ))}
+              </div>
+              <div className="lux-app-banner-cta">
+                <a href="https://apps.apple.com/ca/app/muchglow/id6747438635" className="lux-btn lux-btn-gold" target="_blank" rel="noopener noreferrer">
+                  {t.appBanner.ctaPrimary} →
+                </a>
+                <a href="#features" className="lux-btn lux-btn-ghost" style={{ color: 'var(--cream)', borderColor: 'var(--gold-500)' }}>
+                  {t.appBanner.ctaSecondary}
+                </a>
+              </div>
+            </div>
+            <div className="lux-app-showcase">
+              <div className="lux-showcase-phone">
+                <Image src="/app-home.jpg" alt="MuchGlow Home — Browse services" width={360} height={780} loading="lazy" style={{ width: '100%', height: 'auto' }} />
+              </div>
+              <div className="lux-showcase-phone">
+                <Image src="/app-salon.jpg" alt="MuchGlow — Salon booking with prices" width={360} height={780} loading="lazy" style={{ width: '100%', height: 'auto' }} />
+              </div>
+              <div className="lux-showcase-phone">
+                <Image src="/app-wallet.jpg" alt="MuchGlow Wallet — Top up and earn bonus" width={360} height={780} loading="lazy" style={{ width: '100%', height: 'auto' }} />
+              </div>
+              <div className="lux-price-compare">{t.appBanner.priceBadge}</div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* ============ HOW IT WORKS ============ */}
-      <section id="how-it-works" className="mg-section" style={{ background: 'white' }}>
-        <div className="mg-container">
-          <div className="mg-section-header">
-            <span className="mg-section-label">{t.howItWorks.label}</span>
-            <h2 className="mg-section-title">{t.howItWorks.title}</h2>
+      <section id="how-it-works" className="lux-section" style={{ background: 'var(--cream-2)' }}>
+        <div className="lux-wrap">
+          <div className="lux-sec-head lux-reveal">
+            <span className="lux-eyebrow">{t.howItWorks.eyebrow}</span>
+            <h2>{t.howItWorks.title}</h2>
           </div>
-
-          <div className="mg-steps">
+          <div className="lux-steps">
             {t.howItWorks.steps.map((step, index) => (
-              <motion.div
-                key={index}
-                className="mg-step"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.15 }}
-                viewport={{ once: true }}
-              >
-                <div className="mg-step-number">{step.num}</div>
-                <h4 className="mg-step-title">{step.title}</h4>
-                <p className="mg-step-desc">{step.desc}</p>
-              </motion.div>
+              <div key={index} className="lux-step lux-reveal">
+                <div className="lux-step-num">{step.num}</div>
+                <h3>{step.title}</h3>
+                <p>{step.desc}</p>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ============ PAYMENT SECTION ============ */}
-      <section className="mg-section mg-payment-section">
-        <div className="mg-container">
-          <div className="mg-payment-content">
-            <div className="mg-payment-text">
-              <h2 className="mg-heading-lg">{t.payment.title}</h2>
+      {/* ============ FLEXIBLE PAYMENTS ============ */}
+      <section className="lux-section">
+        <div className="lux-wrap">
+          <div className="lux-payment-strip lux-reveal" style={{ alignItems: 'center' }}>
+            <div style={{ flex: '1' }}>
+              <h3>{t.payment.title}</h3>
               <p>{t.payment.subtitle}</p>
-              <div className="mg-payment-methods">
-                <div className="mg-payment-badge">
-                  <CheckCircle size={20} />
-                  <div>
-                    <strong>Tabby</strong>
-                    <small style={{ display: 'block', fontSize: '0.75rem' }}>{t.payment.tabby}</small>
+              <div className="lux-payment-methods" style={{ marginTop: '20px' }}>
+                {t.payment.methods.map((method, i) => (
+                  <div key={i} className="lux-payment-badge">
+                    <div>
+                      <strong>{method.name}</strong>
+                      <small>{method.status}</small>
+                    </div>
                   </div>
-                </div>
-                <div className="mg-payment-badge">
-                  <CheckCircle size={20} />
-                  <div>
-                    <strong>Tamara</strong>
-                    <small style={{ display: 'block', fontSize: '0.75rem' }}>{t.payment.tamara}</small>
-                  </div>
-                </div>
-                <div className="mg-payment-badge">
-                  <CheckCircle size={20} />
-                  <div>
-                    <strong>Stripe</strong>
-                    <small style={{ display: 'block', fontSize: '0.75rem' }}>{t.payment.stripe}</small>
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
-            <div style={{ display: 'flex', justifyContent: 'center' }}>
-              <motion.div
-                animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 3, repeat: Infinity }}
-                style={{
-                  background: 'white',
-                  borderRadius: '20px',
-                  padding: '2rem',
-                  textAlign: 'center',
-                  boxShadow: '0 20px 50px rgba(0,0,0,0.2)'
-                }}
-              >
-                <CreditCard size={60} color="#0891B2" />
-                <h3 style={{ color: '#1a1518', marginTop: '1rem' }}>0% Interest</h3>
-                <p style={{ color: '#666' }}>Pay Later, Glow Now</p>
-              </motion.div>
+            <div className="lux-showcase-phone" style={{ width: '180px', flexShrink: 0 }}>
+              <Image src="/app-bnpl.png" alt="Tabby & Tamara — Buy now pay later in MuchGlow" width={360} height={780} loading="lazy" style={{ width: '100%', height: 'auto' }} />
             </div>
           </div>
         </div>
       </section>
 
-      {/* ============ TESTIMONIALS SECTION ============ */}
-      <section id="testimonials" className="mg-section mg-testimonials">
-        <div className="mg-container">
-          <div className="mg-section-header">
-            <span className="mg-section-label">{t.testimonials.label}</span>
-            <h2 className="mg-section-title">{t.testimonials.title}</h2>
+      {/* ============ TESTIMONIALS ============ */}
+      <section className="lux-section" style={{ background: 'var(--cream-2)' }}>
+        <div className="lux-wrap">
+          <div className="lux-sec-head lux-reveal">
+            <span className="lux-eyebrow">{t.testimonials.eyebrow}</span>
+            <h2>{t.testimonials.title}</h2>
           </div>
-
-          <div className="mg-testimonials-grid">
-            {t.testimonials.items.map((testimonial, index) => (
-              <motion.div
-                key={index}
-                className="mg-testimonial-card"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                whileHover={{ y: -5, boxShadow: '0 20px 40px rgba(231, 84, 129, 0.15)' }}
-              >
-                <div className="mg-testimonial-quote">
-                  <Quote size={24} className="mg-quote-icon" />
+          <div className="lux-testimonials-grid">
+            {t.testimonials.items.map((item, index) => (
+              <div key={index} className="lux-testimonial lux-reveal">
+                <div className="lux-testimonial-quote">
+                  <Quote size={24} />
                 </div>
-                <p className="mg-testimonial-text">{testimonial.text}</p>
-                <div className="mg-testimonial-rating">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} size={16} fill="#FFD700" color="#FFD700" />
+                <p className="lux-testimonial-text">{item.text}</p>
+                <div className="lux-testimonial-rating">
+                  {[...Array(item.rating)].map((_, i) => (
+                    <Star key={i} size={16} fill="#d8b765" color="#d8b765" />
                   ))}
                 </div>
-                <div className="mg-testimonial-author">
-                  <div className="mg-author-avatar">
-                    {testimonial.name.charAt(0)}
+                <div className="lux-testimonial-author">
+                  <div className="lux-author-avatar">
+                    {item.name.charAt(0)}
                   </div>
-                  <div className="mg-author-info">
-                    <h4>{testimonial.name}</h4>
-                    <span>{testimonial.role}</span>
+                  <div className="lux-author-info">
+                    <h4>{item.name}</h4>
+                    <span>{item.role}</span>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ============ PARTNER REGISTRATION SECTION ============ */}
-      <section id="partner" className="mg-section mg-partner-section">
-        <div className="mg-container">
-          <div className="mg-partner-content">
-            <motion.div
-              initial={{ opacity: 0, x: isRTL ? 30 : -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-            >
-              <span className="mg-section-label" style={{ color: 'rgba(255,255,255,0.7)' }}>{t.partner.label}</span>
-              <h2 className="mg-heading-lg mg-mb-md">{t.partner.title}</h2>
-              <p style={{ marginBottom: '1.5rem' }}>{t.partner.subtitle}</p>
-
-              <ul className="mg-partner-benefits">
+      {/* ============ PARTNER CTA (Dark) ============ */}
+      <section id="partner" className="lux-section">
+        <div className="lux-wrap">
+          <div className="lux-partner lux-reveal">
+            <div>
+              <span className="lux-eyebrow">{t.partner.eyebrow}</span>
+              <h2>
+                {t.partner.title} <span className="lux-serif-italic" style={{ color: 'var(--gold-300)' }}>{t.partner.titleHighlight}</span>
+              </h2>
+              <p>{t.partner.subtitle}</p>
+              <ul className="lux-partner-benefits">
                 {t.partner.benefits.map((benefit, index) => (
-                  <li key={index}>{benefit}</li>
+                  <li key={index}>
+                    <span className="lux-partner-check">✓</span>
+                    {benefit}
+                  </li>
                 ))}
               </ul>
-            </motion.div>
+              <div style={{ marginTop: '24px', display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+                <a href="https://apps.apple.com/ca/app/muchglow-partners/id6747438839" className="lux-btn lux-btn-gold" target="_blank" rel="noopener noreferrer" style={{ fontSize: '13px', padding: '10px 18px' }}>
+                  Partner App (iOS)
+                </a>
+                <a href="https://play.google.com/store/apps/details?id=com.muchglow.partners.app" className="lux-btn lux-btn-gold" target="_blank" rel="noopener noreferrer" style={{ fontSize: '13px', padding: '10px 18px' }}>
+                  Partner App (Android)
+                </a>
+              </div>
+            </div>
 
-            <motion.div
-              initial={{ opacity: 0, x: isRTL ? -30 : 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-            >
-              <div className="mg-partner-form-card">
-                <h3>{t.partner.formTitle}</h3>
+            <div className="lux-pform">
+              <h3>{t.partner.formTitle}</h3>
 
-                {formSuccess ? (
-                  <div className="mg-alert mg-alert-success mg-form-success" style={{ textAlign: 'center', padding: '2rem' }}>
-                    <CheckCircle size={48} style={{ marginBottom: '1rem', color: '#28a745' }} />
-                    <h4 style={{ color: '#155724', marginBottom: '0.5rem' }}>Success!</h4>
-                    <p>{t.partner.success}</p>
-                  </div>
-                ) : (
-                  <form onSubmit={handleSubmit}>
-                    <div className="mg-form-row mg-mb-md">
-                      <div className="mg-form-group">
-                        <label className="mg-label">{t.partner.fields.companyName} *</label>
-                        <input
-                          type="text"
-                          name="companyName"
-                          className="mg-input"
-                          value={formData.companyName}
-                          onChange={handleInputChange}
-                          required
-                        />
-                      </div>
-                      <div className="mg-form-group">
-                        <label className="mg-label">{t.partner.fields.contactPerson} *</label>
-                        <input
-                          type="text"
-                          name="contactPerson"
-                          className="mg-input"
-                          value={formData.contactPerson}
-                          onChange={handleInputChange}
-                          required
-                        />
-                      </div>
-                    </div>
-
-                    <div className="mg-form-row mg-mb-md">
-                      <div className="mg-form-group">
-                        <label className="mg-label">{t.partner.fields.email} *</label>
-                        <input
-                          type="email"
-                          name="email"
-                          className="mg-input"
-                          value={formData.email}
-                          onChange={handleInputChange}
-                          required
-                        />
-                      </div>
-                      <div className="mg-form-group">
-                        <label className="mg-label">{t.partner.fields.phone} *</label>
-                        <input
-                          type="tel"
-                          name="phone"
-                          className="mg-input"
-                          value={formData.phone}
-                          onChange={handleInputChange}
-                          required
-                        />
-                      </div>
-                    </div>
-
-                    <div className="mg-form-row mg-mb-md">
-                      <div className="mg-form-group">
-                        <label className="mg-label">{t.partner.fields.country} *</label>
-                        <select
-                          name="country"
-                          className="mg-input mg-select"
-                          value={formData.country}
-                          onChange={handleInputChange}
-                          required
-                        >
-                          <option value="">Select</option>
-                          {t.partner.countries.map((country, i) => (
-                            <option key={i} value={country}>{country}</option>
-                          ))}
-                        </select>
-                      </div>
-                      <div className="mg-form-group">
-                        <label className="mg-label">{t.partner.fields.businessType} *</label>
-                        <select
-                          name="businessType"
-                          className="mg-input mg-select"
-                          value={formData.businessType}
-                          onChange={handleInputChange}
-                          required
-                        >
-                          <option value="">Select</option>
-                          {t.partner.businessTypes.map((type, i) => (
-                            <option key={i} value={type}>{type}</option>
-                          ))}
-                        </select>
-                      </div>
-                    </div>
-
-                    <div className="mg-form-group mg-mb-lg">
-                      <label className="mg-label">{t.partner.fields.message}</label>
-                      <textarea
-                        name="message"
-                        className="mg-input mg-textarea"
-                        value={formData.message}
+              {formSuccess ? (
+                <div className="lux-form-success">
+                  <CheckCircle size={48} />
+                  <h4>Success!</h4>
+                  <p>{t.partner.success}</p>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit}>
+                  <div className="lux-pf-row">
+                    <div>
+                      <label>{t.partner.fields.companyName} *</label>
+                      <input
+                        type="text"
+                        name="companyName"
+                        value={formData.companyName}
                         onChange={handleInputChange}
-                        rows={3}
+                        required
                       />
                     </div>
+                    <div>
+                      <label>{t.partner.fields.contactPerson} *</label>
+                      <input
+                        type="text"
+                        name="contactPerson"
+                        value={formData.contactPerson}
+                        onChange={handleInputChange}
+                        required
+                      />
+                    </div>
+                  </div>
 
-                    <button
-                      type="submit"
-                      className="mg-btn mg-btn-primary"
-                      style={{ width: '100%' }}
-                      disabled={formLoading}
-                    >
-                      {formLoading ? (
-                        <>
-                          <span className="mg-spinner" />
-                          {t.partner.submitting}
-                        </>
-                      ) : (
-                        <>
-                          <Send size={18} />
-                          {t.partner.submit}
-                        </>
-                      )}
-                    </button>
-                  </form>
-                )}
-              </div>
-            </motion.div>
+                  <div className="lux-pf-row">
+                    <div>
+                      <label>{t.partner.fields.email} *</label>
+                      <input
+                        type="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        required
+                      />
+                    </div>
+                    <div>
+                      <label>{t.partner.fields.phone} *</label>
+                      <input
+                        type="tel"
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handleInputChange}
+                        required
+                      />
+                    </div>
+                  </div>
+
+                  <div className="lux-pf-row">
+                    <div>
+                      <label>{t.partner.fields.country} *</label>
+                      <select
+                        name="country"
+                        value={formData.country}
+                        onChange={handleInputChange}
+                        required
+                      >
+                        <option value="">Select</option>
+                        {t.partner.countries.map((country, i) => (
+                          <option key={i} value={country}>{country}</option>
+                        ))}
+                      </select>
+                    </div>
+                    <div>
+                      <label>{t.partner.fields.businessType} *</label>
+                      <select
+                        name="businessType"
+                        value={formData.businessType}
+                        onChange={handleInputChange}
+                        required
+                      >
+                        <option value="">Select</option>
+                        {t.partner.businessTypes.map((type, i) => (
+                          <option key={i} value={type}>{type}</option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+
+                  <div style={{ marginBottom: '12px' }}>
+                    <label>{t.partner.fields.message}</label>
+                    <input
+                      type="text"
+                      name="message"
+                      value={formData.message}
+                      onChange={handleInputChange}
+                      placeholder={isRTL ? 'أخبرنا عن عملك' : 'Tell us about your business'}
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="lux-btn lux-btn-gold"
+                    disabled={formLoading}
+                    style={{ width: '100%', justifyContent: 'center' }}
+                  >
+                    {formLoading ? (
+                      <>
+                        <span className="lux-spinner" />
+                        {t.partner.submitting}
+                      </>
+                    ) : (
+                      <>
+                        <Send size={16} />
+                        {t.partner.submit} →
+                      </>
+                    )}
+                  </button>
+                </form>
+              )}
+            </div>
           </div>
         </div>
       </section>
 
       {/* ============ FOOTER ============ */}
-      <footer id="footer" className="mg-footer">
-        <div className="mg-container">
-          <div className="mg-footer-content">
-            <div className="mg-footer-brand">
-              <Image src={MuchGlowLogo} alt="MuchGlow" className="mg-footer-logo" height={80} width={250} />
-              <p className="mg-footer-desc">{t.footer.desc}</p>
-              <div className="mg-social-links">
-                <a href="https://instagram.com" className="mg-social-link" target="_blank" rel="noopener noreferrer">
-                  <Instagram size={18} />
-                </a>
-                <a href="https://linkedin.com" className="mg-social-link" target="_blank" rel="noopener noreferrer">
-                  <Linkedin size={18} />
-                </a>
-              </div>
-            </div>
-
-            <div>
-              <h4 className="mg-footer-heading">{t.footer.headOffice}</h4>
-              <ul className="mg-footer-links">
-                <li><MapPin size={14} style={{ display: 'inline', marginRight: '0.5rem' }} />{t.footer.address}</li>
-                <li><a href="mailto:support@muchglow.com"><Mail size={14} style={{ display: 'inline', marginRight: '0.5rem' }} />support@muchglow.com</a></li>
-                <li><a href="mailto:admin@muchglow.com"><Mail size={14} style={{ display: 'inline', marginRight: '0.5rem' }} />admin@muchglow.com</a></li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="mg-footer-heading">{t.footer.getApp}</h4>
-              <ul className="mg-footer-links">
-                <li><a href="#">{t.footer.appStore}</a></li>
-                <li><a href="#">{t.footer.googlePlay}</a></li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="mg-footer-heading">{t.footer.helpCenter}</h4>
-              <ul className="mg-footer-links">
-                <li><Link href={`/${lang}/terms`}>{t.footer.terms}</Link></li>
-                <li><Link href={`/${lang}/privacy`}>{t.footer.privacy}</Link></li>
-              </ul>
-            </div>
+      <footer className="lux-footer">
+        <div className="lux-wrap lux-foot-grid">
+          <div className="lux-foot-brand">
+            <Link href={`/${lang}`} className="lux-brand">
+              <span className="lux-mark"><BrandLogo /></span>
+              MuchGlow
+            </Link>
+            <p>{t.footer.desc}</p>
           </div>
 
-          <div className="mg-footer-bottom">
-            <p><strong style={{ color: '#0891B2' }}>MuchGlow</strong> - {t.footer.copyright} &copy; {new Date().getFullYear()}</p>
+          <div className="lux-foot-col">
+            <h4>{t.footer.headOffice}</h4>
+            <span>{t.footer.address}</span>
+            <a href="mailto:support@muchglow.com">support@muchglow.com</a>
+            <a href="mailto:admin@muchglow.com">admin@muchglow.com</a>
           </div>
+
+          <div className="lux-foot-col">
+            <h4>{t.footer.getApp}</h4>
+            <a href="https://apps.apple.com/ca/app/muchglow/id6747438635" target="_blank" rel="noopener noreferrer">{t.footer.customerApp} (iOS)</a>
+            <a href="https://play.google.com/store/apps/details?id=com.muchglow.care.app" target="_blank" rel="noopener noreferrer">{t.footer.customerApp} (Android)</a>
+            <a href="https://apps.apple.com/ca/app/muchglow-partners/id6747438839" target="_blank" rel="noopener noreferrer">{t.footer.partnerApp} (iOS)</a>
+            <a href="https://play.google.com/store/apps/details?id=com.muchglow.partners.app" target="_blank" rel="noopener noreferrer">{t.footer.partnerApp} (Android)</a>
+          </div>
+
+          <div className="lux-foot-col">
+            <h4>{t.footer.helpCenter}</h4>
+            <Link href={`/${lang}/terms`}>{t.footer.terms}</Link>
+            <Link href={`/${lang}/privacy`}>{t.footer.privacy}</Link>
+          </div>
+        </div>
+        <div className="lux-foot-bot">
+          <b>MuchGlow</b> — {t.footer.copyright} &copy; {new Date().getFullYear()}
         </div>
       </footer>
 
@@ -1162,36 +1101,30 @@ const CompactLanding: React.FC<CompactLandingProps> = ({ lang = 'en' }) => {
       <AnimatePresence>
         {showScrollTop && (
           <motion.button
-            className="mg-scroll-top visible"
+            className="lux-scroll-top"
             onClick={scrollToTop}
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.8 }}
-            whileHover={{ scale: 1.1 }}
             aria-label="Scroll to top"
           >
-            <ChevronUp size={24} />
+            <ChevronUp size={22} />
           </motion.button>
         )}
       </AnimatePresence>
 
-      {/* ============ WHATSAPP FLOATING BUTTON ============ */}
-      <motion.a
+      {/* ============ WHATSAPP BUTTON ============ */}
+      <a
         href="https://wa.me/971503759296"
         target="_blank"
         rel="noopener noreferrer"
-        className="mg-whatsapp-btn"
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        transition={{ delay: 1, type: 'spring', stiffness: 200 }}
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
+        className="lux-whatsapp"
         aria-label="Chat on WhatsApp"
       >
-        <svg viewBox="0 0 24 24" width="28" height="28" fill="white">
-          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        <svg viewBox="0 0 24 24" fill="white">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
         </svg>
-      </motion.a>
+      </a>
 
       {/* Toast Container */}
       <ToastContainer

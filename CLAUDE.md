@@ -2,6 +2,8 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+> **IMPORTANT:** Always read `CONTEXT.md` for project history and previous conversations.
+
 ## Build & Development Commands
 
 ```bash
@@ -14,7 +16,7 @@ npm run lint         # Run ESLint
 
 ## Technology Stack
 
-- **Next.js 15.0.7** with App Router and TypeScript (security patched)
+- **Next.js 15.5.9** with App Router and TypeScript (security patched)
 - **React Bootstrap** + Bootstrap 5.3 for UI components
 - **Framer Motion** for animations
 - **FontAwesome** + **Lucide React** for icons
@@ -82,6 +84,7 @@ The project uses relaxed ESLint rules (warnings not errors) for:
 ## Security Notes
 
 - **Keep Next.js updated**: Check for security patches regularly
+- **2026-01-05**: Upgraded to Next.js 15.5.9 to fix 8 security advisories (GHSA-7m27-7ghc-44w9, GHSA-3h52-269p-cp9r, GHSA-67rr-84xm-4c7r, GHSA-g5qg-72qw-gw5v, GHSA-xv57-4mr9-wg8v, GHSA-4342-x723-ch2f, GHSA-qpjv-v59x-3qc4, GHSA-f82v-jwr5-mffw)
 - CVE-2025-66478 (React2Shell) was patched by upgrading to Next.js 15.0.7
 - Run `npm audit` periodically to check for vulnerabilities
 - After security updates, always run `npm run build` to verify no breaking changes
@@ -97,3 +100,19 @@ When sending updates to the deployment team:
    npm run build
    # Restart the application (pm2 restart or systemctl restart)
    ```
+
+## Build Verification Log
+
+**2026-01-05**: Security update - Next.js upgraded to 15.5.9
+- Fixed critical vulnerability (GHSA-7m27-7ghc-44w9 and 7 others)
+- `npm audit` now shows **0 vulnerabilities**
+- `npm run build` completes with zero errors
+- All 22 static pages generate correctly
+- Type checking passes
+
+**2026-01-03**: Production build verified successfully
+- `npm run build` completes with zero errors
+- All 22 static pages generate correctly
+- Type checking passes
+- Only lint warnings (unused imports, unescaped quotes) — no breaking issues
+- 502 Bad Gateway errors on production are server-side operational issues (nginx/PM2/port config), NOT codebase issues
