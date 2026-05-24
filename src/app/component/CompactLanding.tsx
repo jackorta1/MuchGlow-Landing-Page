@@ -348,7 +348,7 @@ const CompactLanding: React.FC<CompactLandingProps> = ({ lang = 'en' }) => {
         title: 'خيارات دفع مرنة',
         subtitle: 'قسّط مدفوعاتك بدون فوائد مع شركاء الدفع المدعومين.',
         methods: [
-          { name: 'Tabby', status: 'قريبًا' },
+          { name: 'Tabby', status: 'متاح' },
           { name: 'Tamara', status: 'متاح' },
           { name: 'Stripe', status: 'متاح' },
           { name: 'Apple Pay', status: 'متاح' }
