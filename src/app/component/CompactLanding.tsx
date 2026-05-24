@@ -179,7 +179,7 @@ const CompactLanding: React.FC<CompactLandingProps> = ({ lang = 'en' }) => {
         title: 'Flexible Payments',
         subtitle: 'Split payments with zero interest using our supported payment partners.',
         methods: [
-          { name: 'Tabby', status: 'Coming Soon' },
+          { name: 'Tabby', status: 'Live' },
           { name: 'Tamara', status: 'Live' },
           { name: 'Stripe', status: 'Live' },
           { name: 'Apple Pay', status: 'Live' }
