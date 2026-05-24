@@ -1074,6 +1074,8 @@ const CompactLanding: React.FC<CompactLandingProps> = ({ lang = 'en' }) => {
           <div className="lux-foot-col">
             <h4>{t.footer.headOffice}</h4>
             <span>{t.footer.address}</span>
+            <a href="tel:+971566631812">+971 56 663 1812</a>
+            <a href="https://wa.me/971566631812" target="_blank" rel="noopener noreferrer">WhatsApp</a>
             <a href="mailto:support@muchglow.com">support@muchglow.com</a>
             <a href="mailto:admin@muchglow.com">admin@muchglow.com</a>
           </div>
@@ -1115,7 +1117,7 @@ const CompactLanding: React.FC<CompactLandingProps> = ({ lang = 'en' }) => {
 
       {/* ============ WHATSAPP BUTTON ============ */}
       <a
-        href="https://wa.me/971503759296"
+        href="https://wa.me/971566631812"
         target="_blank"
         rel="noopener noreferrer"
         className="lux-whatsapp"
